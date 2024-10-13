@@ -1,11 +1,10 @@
 ﻿using HotelArmor.Domain;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Xunit.Sdk;
-using FactAttribute;
+
 namespace HotelArmor.Tests;
 
-public class ClassTests (HotelArmorData data) : IClassFixture<HotelBookingDetailsData> {
+public class ClassTests (HotelArmorData data) : IClassFixture<HotelArmorData> {
     private readonly HotelArmorData data_a = data;
 
     [Fact]
