@@ -25,4 +25,4 @@ jobs:
     - name: Build
       run: dotnet build HotelArmor.Domain/HotelArmor.Domain.sln --no-restore
     - name: Test
-      run: dotnet test HotelArmor.Domain/HotelArmor.Tests/HotelArmor.Tests.csproj --no-build --verbosity norma
+      run: dotnet test HotelArmor.Domain/HotelArmor.Domain.sln --no-build --verbosity norma
