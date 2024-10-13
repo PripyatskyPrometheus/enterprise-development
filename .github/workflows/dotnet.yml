@@ -21,8 +21,8 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore ./HotelArmor.Domain/HotelArmor.Domain.sln
+      run: dotnet restore
     - name: Build
-      run: dotnet build ./HotelArmor.Domain/HotelArmor.Domain.sln --no-restore
-    - name: Tests
-      run: dotnet test .HotelArmor.Domain/HotelArmor.Domain.sln --no-build --verbosity normal
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test ./HotelArmor.Tests/HotelArmor.Tests.csproj --no-build --verbosity norma

@@ -1,4 +1,8 @@
 ﻿using HotelArmor.Domain;
+using System.Linq;
+using System.Runtime.InteropServices;
+using Xunit.Sdk;
+
 namespace HotelArmor.Tests;
 
 public class ClassTests (HotelArmorData data) : IClassFixture<HotelBookingDetailsData> {
