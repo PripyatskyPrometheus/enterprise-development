@@ -1,9 +1,10 @@
-﻿namespace HotelArmor.Domain;
+﻿namespace HotelBooking.Domain;
 
 /// <summary>
 ///     Данные клиента
 /// </summary>
-public class Client {
+public class Client 
+{
     /// <summary>
     ///     Id клиента
     /// </summary>
@@ -17,7 +18,7 @@ public class Client {
     /// <summary>
     ///     Пасспорт
     /// </summary>
-    public required Pasport PasportData { get; set; }
+    public required Passport PasportData { get; set; }
 
     /// <summary>
     ///     Дата рождения

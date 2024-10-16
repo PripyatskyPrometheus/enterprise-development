@@ -1,9 +1,10 @@
-﻿namespace HotelArmor.Domain;
+﻿namespace HotelBooking.Domain;
 
 /// <summary>
 ///     Забронированные номера
 /// </summary>
-public class ArmoredRoom {
+public class BookedRoom 
+{
     /// <summary>
     ///     Клиент  
     /// </summary>
@@ -22,7 +23,7 @@ public class ArmoredRoom {
     /// <summary>
     ///     Дата выселения
     /// </summary>
-    public DateOnly DateEvection { get; set; }
+    public required DateOnly DateEvection { get; set; }
 
     /// <summary>
     ///     Период

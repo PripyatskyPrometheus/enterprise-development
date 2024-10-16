@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelArmor.Domain", "HotelArmor.Domain\HotelArmor.Domain.csproj", "{AA0AFE26-8371-421A-9D9C-2CA30324DCFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelBooking.Domain", "HotelArmor.Domain\HotelBooking.Domain.csproj", "{AA0AFE26-8371-421A-9D9C-2CA30324DCFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelArmor.Tests", "HotelArmor.Tests\HotelArmor.Tests.csproj", "{1D6EB41E-B0ED-4AEC-8D52-D9AAE912C698}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelBooking.Tests", "HotelArmor.Tests\HotelBooking.Tests.csproj", "{1D6EB41E-B0ED-4AEC-8D52-D9AAE912C698}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

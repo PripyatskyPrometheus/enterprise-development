@@ -1,11 +1,11 @@
-﻿using HotelArmor.Domain;
-namespace HotelArmor.Tests;
+﻿using HotelBooking.Domain;
+namespace HotelBooking.Tests;
 
 /// <summary>
 /// Класс с шестью тестами
 /// </summary>
-public class Test(HotelArmorData data) : IClassFixture<HotelArmorData> {
-    private readonly HotelArmorData data_a = data;
+public class Test(HotelBookedData data) : IClassFixture<HotelBookedData> {
+    private readonly HotelBookedData data_a = data;
 
     /// <summary>
     /// Тест на вывод сведений о всех отелях
@@ -75,8 +75,10 @@ public class Test(HotelArmorData data) : IClassFixture<HotelArmorData> {
     /// Тест на вывод информации о свободных номерах, в указанном городе
     /// </summary>
     [Fact]
-    public void ReturnFreeRooms() {
-        var expectedRooms = new List<Room> { 
+    public void ReturnFreeRooms() 
+    {
+        var expectedRooms = new List<Room> 
+        { 
             data_a.Rooms[4] 
         };
         var city = "New York";
@@ -98,8 +100,10 @@ public class Test(HotelArmorData data) : IClassFixture<HotelArmorData> {
     /// Тест на возврат сведений о клиентах, занявших номера на самое продолжительное время
     /// </summary>
     [Fact]
-    public void ReturnLongLiversHotel() {
-        var expecteClients = new List<Client> {
+    public void ReturnLongLiversHotel() 
+    {
+        var expecteClients = new List<Client> 
+        {
             data_a.Clients[4],
             data_a.Clients[13]
         };
@@ -112,7 +116,8 @@ public class Test(HotelArmorData data) : IClassFixture<HotelArmorData> {
 
         var clientWithLongerPer = data_a.ArmoredRooms
             .GroupBy(c => c.Client)
-            .Select(c => new {
+            .Select(c => new 
+            {
                 Client = c.Key,
                 Total = c.Sum(r => r.Period)
             }).Where(c => c.Total == longerPeriods).Select(c => c.Client).ToList();
@@ -123,10 +128,12 @@ public class Test(HotelArmorData data) : IClassFixture<HotelArmorData> {
     /// Тест на вывод сведений о минимальной, максимальной и средней ценах за комнаты в каждом отеле
     /// </summary>
     [Fact]
-    public void MinAvgMaxCostInHotel() {
+    public void MinAvgMaxCostInHotel() 
+    {
         var hotels = data_a.Hotels.Select(h => h);
 
-        var hotelCosts = hotels.Select(h => new {
+        var hotelCosts = hotels.Select(h => new 
+        {
             Hotel = (data_a.Hotels.Where(hotel => hotel.ID == h.ID).Select(hotel => hotel)),
             Min = data_a.Rooms.Where(r => r.HotelID == h.ID).Select(r => r).ToList().Min(rm => rm.Cost),
             Max = data_a.Rooms.Where(r => r.HotelID == h.ID).Select(r => r).ToList().Max(rm => rm.Cost),

@@ -1,15 +1,18 @@
-﻿using HotelArmor.Domain;
-namespace HotelArmor.Tests;
+﻿using HotelBooking.Domain;
+namespace HotelBooking.Tests;
 
-public class HotelArmorData {
+public class HotelBookedData 
+{
 
-    public List<TypeRoom> TypesRoom = [
+    public List<TypeRoom> TypesRoom = 
+    [
         new(){ ID = 1,  NameRoom = "Luxary"},
         new(){ ID = 2,  NameRoom = "Economy"},
         new(){ ID = 3,  NameRoom = "Comfort"}
     ];
 
-    public List<Pasport> Pasports = [
+    public List<Passport> Passports = 
+        [
         new(){ID = 1, Series = 6313, Number = 123421},
         new(){ID = 2, Series = 1234, Number = 567890 },
         new(){ID = 3, Series = 5678, Number = 987654},
@@ -35,134 +38,156 @@ public class HotelArmorData {
     public List<Room> Rooms;
     public List<Hotel> Hotels;
     public List<Client> Clients;
-    public List<ArmoredRoom> ArmoredRooms;
+    public List<BookedRoom> ArmoredRooms;
 
-    public HotelArmorData() {
-        Clients = [
-            new() {
+    public HotelBookedData() 
+    {
+        Clients = 
+            [
+            new() 
+            {
                 ID = 1,
                 FullName = "Иванов Иван Иванович",
-                PasportData = Pasports[0],
+                PasportData = Passports[0],
                 BirthOfDay =  new DateOnly(2003, 1, 1)
             },
-            new() {
+            new() 
+            {
                 ID = 2,
                 FullName = "Петров Петр Петрович",
-                PasportData = Pasports[1],
+                PasportData = Passports[1],
                 BirthOfDay =  new DateOnly(2002, 5, 15 )
             },
-            new() {
+            new() 
+            {
                 ID = 3,
                 FullName = "Сидоров Сидор Сидорович",
-                PasportData = Pasports[2],
+                PasportData = Passports[2],
                 BirthOfDay =  new DateOnly(2001, 9, 20 )
             },
-            new() {
+            new() 
+            {
                 ID = 4,
                 FullName = "Кузнецов Алексей Владимирович",
-                PasportData = Pasports[3],
+                PasportData = Passports[3],
                 BirthOfDay =  new DateOnly(2004, 3, 10)
             },
-            new() {
+            new() 
+            {
                 ID = 5,
                 FullName = "Смирнов Дмитрий Александрович",
-                PasportData = Pasports[4],
+                PasportData = Passports[4],
                 BirthOfDay =  new DateOnly(2000, 8, 27)
             },
-            new() {
+            new() 
+            {
                 ID = 6,
                 FullName = "Козлов Игорь Сергеевич",
-                PasportData = Pasports[5],
+                PasportData = Passports[5],
                 BirthOfDay =  new DateOnly(2005, 2, 18)
             },
-            new() {
+            new() 
+            {
                 ID = 7,
                 FullName = "Лебедев Владислав Денисович",
-                PasportData = Pasports[6],
+                PasportData = Passports[6],
                 BirthOfDay =  new DateOnly(2003, 10, 05)
             },
-            new() {
+            new() 
+            {
                 ID = 8,
                 FullName = "Никитин Андрей Алексеевич",
-                PasportData = Pasports[7],
+                PasportData = Passports[7],
                 BirthOfDay =  new DateOnly(2001, 12, 30)
             },
-            new() {
+            new() 
+            {
                 ID = 9,
                 FullName = "Морозов Кирилл Васильевич",
-                PasportData = Pasports[8],
+                PasportData = Passports[8],
                 BirthOfDay =  new DateOnly(2000, 4, 09)
             },
-            new() {
+            new() 
+            {
                 ID = 10,
                 FullName = "Андреев Евгений Дмитриевич",
-                PasportData = Pasports[9],
+                PasportData = Passports[9],
                BirthOfDay =  new DateOnly(2002, 7, 14)
             },
-            new() {
+            new() 
+            {
                 ID = 11,
                 FullName = "Богданова Елена Игоревна",
-                PasportData = Pasports[10],
+                PasportData = Passports[10],
                 BirthOfDay =  new DateOnly(2004, 11, 21)
             },
-            new() {
+            new() 
+            {
                 ID = 12,
                 FullName = "Семенов Максим Павлович",
-                PasportData = Pasports[11],
+                PasportData = Passports[11],
                 BirthOfDay =  new DateOnly(2003, 6, 2)
             },
-            new() {
+            new() 
+            {
                 ID = 13,
                 FullName = "Козлова Виктория Алексеевна",
-                PasportData = Pasports[12],
+                PasportData = Passports[12],
                 BirthOfDay =  new DateOnly(2000, 12, 15)
             },
-            new() {
+            new() 
+            {
                 ID = 14,
                 FullName = "Новикова Анастасия Сергеевна",
-                PasportData = Pasports[13],
+                PasportData = Passports[13],
                 BirthOfDay =  new DateOnly(2001, 3, 25)
             },
-            new() {
+            new() 
+            {
                 ID = 15,
                 FullName = "Гаврилова Ольга Владимировна",
-                PasportData = Pasports[14],
+                PasportData = Passports[14],
                 BirthOfDay =  new DateOnly(2002, 9, 12)
             },
-            new() {
+            new() 
+            {
                 ID = 16,
                 FullName = "Белякова Светлана Ивановна",
-                PasportData = Pasports[15],
+                PasportData = Passports[15],
                 BirthOfDay =  new DateOnly(2004, 7, 3)
             },
-            new() {
+            new() 
+            {
                 ID = 17,
                 FullName = "Федорова Екатерина Дмитриевна",
-                PasportData = Pasports[16],
+                PasportData = Passports[16],
                 BirthOfDay =  new DateOnly(2003, 4, 28)
             },
-            new() {
+            new() 
+            {
                 ID = 18,
                 FullName = "Алексеева Ирина Александровна",
-                PasportData = Pasports[17],
+                PasportData = Passports[17],
                 BirthOfDay =  new DateOnly(2001, 10, 17)
             },
-            new() {
+            new() 
+            {
                 ID = 19,
                 FullName = "Тихонова Татьяна Васильевна",
-                PasportData = Pasports[18],
+                PasportData = Passports[18],
                 BirthOfDay =  new DateOnly(2001, 10, 17)
             },
             new()
             {
                 ID = 20,
                 FullName = "Жмурова Мелания Максимова",
-                PasportData = Pasports[19],
+                PasportData = Passports[19],
                 BirthOfDay =  new DateOnly(2002, 02, 17)
             }
         ];
 
-        Rooms = [
+        Rooms = 
+        [
             new(){ID = 1, Capacity = 2, Cost = 3000, Type = TypesRoom[0], HotelID = 0},
             new(){ID = 2, Capacity = 1, Cost = 4000, Type = TypesRoom[1], HotelID = 0},
             new(){ID = 3, Capacity = 3, Cost = 5000, Type = TypesRoom[2], HotelID = 0},
@@ -186,7 +211,8 @@ public class HotelArmorData {
             new(){ID = 21, Capacity = 5, Cost = 23000, Type = TypesRoom[2], HotelID = 5},
         ];
 
-        Hotels = [
+        Hotels = 
+        [
             new(){ID = 0, Name = "Гостиница Москва", Address = "Новосадовая 34Э", City = "Вашингтон"},
             new(){ID = 1, Name = "Grand Hotel", Address = "Park Avenue 123", City = "New York"},
             new(){ID = 2, Name = "Hilton", Address = "Main Street 55", City = "Chicago"},
@@ -195,13 +221,14 @@ public class HotelArmorData {
             new(){ID = 5, Name = "Ritz-Carlton", Address = "Michigan Avenue 160", City = "Chicago"},
         ];
 
-       ArmoredRooms = [
+       ArmoredRooms = 
+       [
             new(){ Client = Clients[0], DateArrival = new DateOnly(2024, 4, 28), Period = 10, Room = Rooms[0], DateEvection =  new DateOnly(2024, 5, 8)},
             new(){ Client = Clients[11], DateArrival = new DateOnly(2024, 4, 28), Period= 10, Room = Rooms[11], DateEvection =  new DateOnly(2024, 05, 8)},
             new(){ Client = Clients[1], DateArrival = new DateOnly(2024, 5, 5), Period= 5, Room = Rooms[1], DateEvection =  new DateOnly(2024, 5, 10)},
             new(){ Client = Clients[2], DateArrival = new DateOnly(2024, 5, 15), Period= 7, Room= Rooms[2], DateEvection =  new DateOnly(2024, 5, 22)},
             new(){ Client = Clients[3], DateArrival = new DateOnly(2024, 6, 1), Period= 3, Room= Rooms[3], DateEvection =  new DateOnly(2024, 6, 4)},
-            new(){ Client = Clients[4], DateArrival = new DateOnly(2024, 6, 10), Period= 14, Room= Rooms[4]},
+            new(){ Client = Clients[4], DateArrival = new DateOnly(2024, 6, 10), Period= 14, Room= Rooms[4], DateEvection =  new DateOnly(2024, 6, 24)},
             new(){ Client = Clients[5], DateArrival = new DateOnly(2024, 6, 20), Period= 9, Room= Rooms[5], DateEvection =  new DateOnly(2024, 06, 29)},
             new(){ Client = Clients[6], DateArrival = new DateOnly(2024, 7, 1), Period= 6, Room= Rooms[6], DateEvection =  new DateOnly(2024, 7, 7)},
             new(){ Client = Clients[7], DateArrival = new DateOnly(2024, 7, 10), Period= 11, Room= Rooms[7], DateEvection =  new DateOnly(2024, 7, 21)},

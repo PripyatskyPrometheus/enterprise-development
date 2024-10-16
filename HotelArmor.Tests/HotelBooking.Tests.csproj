@@ -8,6 +8,8 @@
 
 	<IsPackable>false</IsPackable>
 	<IsTestProject>true</IsTestProject>
+	<AssemblyName>HotelBooking.Tests</AssemblyName>
+	<RootNamespace>HotelBooking.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +20,7 @@
   </ItemGroup>
 	
   <ItemGroup>
-    <ProjectReference Include="..\HotelArmor.Domain\HotelArmor.Domain.csproj" />
+    <ProjectReference Include="..\HotelArmor.Domain\HotelBooking.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

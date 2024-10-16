@@ -1,8 +1,10 @@
-﻿namespace HotelArmor.Domain;
+﻿namespace HotelBooking.Domain;
+
 /// <summary>
 ///     Паспортные данные клиента
 /// </summary>
-public class Pasport {
+public class Passport 
+{
     /// <summary>
     ///     ID паспорта
     /// </summary>

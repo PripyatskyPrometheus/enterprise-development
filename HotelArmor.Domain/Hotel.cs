@@ -1,9 +1,10 @@
-﻿namespace HotelArmor.Domain;
+﻿namespace HotelBooking.Domain;
 
 /// <summary>
 /// Отель
 /// </summary>
-public class Hotel {
+public class Hotel 
+{
     /// <summary>
     /// ID отеля
     /// </summary>

@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>HotelBooking.Domain</AssemblyName>
+    <RootNamespace>HotelBooking.Domain</RootNamespace>
+    <PackageId>HotelBooking.Domain</PackageId>
+    <Authors>HotelBooking.Domain</Authors>
+    <Product>HotelBooking.Domain</Product>
+  </PropertyGroup>
+
+</Project>

@@ -1,9 +1,10 @@
-﻿namespace HotelArmor.Domain;
+﻿namespace HotelBooking.Domain;
 
 /// <summary>
 ///     Типы номеров
 /// </summary>
-public class TypeRoom {
+public class TypeRoom 
+{
     /// <summary>
     ///     ID типа
     /// </summary>
