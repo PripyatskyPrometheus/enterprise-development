@@ -1,14 +1,14 @@
 ﻿namespace HotelBooking.Domain;
 
 /// <summary>
-///     Паспортные данные клиента
+/// Паспортные данные клиента
 /// </summary>
 public class Passport 
 {
     /// <summary>
-    ///     ID паспорта
+    /// Идентификатор паспорта
     /// </summary>
-    public required int ID { get; set; }
+    public required int Id { get; set; }
 
 /// <summary>
     /// Серия
@@ -16,7 +16,7 @@ public class Passport
     public required int Series { get; set; }
 
     /// <summary>
-    ///     Номер
+    /// Номер
     /// </summary>
     public required int Number { get; set; }
 }

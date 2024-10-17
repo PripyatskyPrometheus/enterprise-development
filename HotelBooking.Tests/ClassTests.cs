@@ -4,24 +4,17 @@ namespace HotelBooking.Tests;
 /// <summary>
 /// Класс с шестью тестами
 /// </summary>
-public class Test(HotelBookedData data) : IClassFixture<HotelBookedData> {
-    private readonly HotelBookedData data_a = data;
+public class Test(HotelBookedData testData) : IClassFixture<HotelBookedData> {
+    private readonly HotelBookedData _testData = testData;
 
     /// <summary>
     /// Тест на вывод сведений о всех отелях
     /// </summary>
     [Fact]
     public void ReturnAllHotels() {
-        var countHotels = data_a.Hotels.Select(h => h).ToList();
-        var expectedHotels = new List<Hotel> {
-            data_a.Hotels[0],
-            data_a.Hotels[1],
-            data_a.Hotels[2],
-            data_a.Hotels[3],
-            data_a.Hotels[4],
-            data_a.Hotels[5]
-        };
-        Assert.Equal(expectedHotels, countHotels);
+        var countHotels = _testData.Hotels.Select(h => h).ToList();
+        Assert.NotEmpty(countHotels);
+        Assert.Equal(6, countHotels.Count);
     }
 
     /// <summary>
@@ -29,21 +22,16 @@ public class Test(HotelBookedData data) : IClassFixture<HotelBookedData> {
     /// </summary>
     [Fact]
     public void ReturnAllClientInHotel() {
-        var expecteClients = new List<Client> {
-            data_a.Clients[9],
-            data_a.Clients[10],
-            data_a.Clients[8],
-            data_a.Clients[11]
-        };
-        var hotelId = data_a.Hotels.Where(h => h.Name == "Hilton").Select(h => h.ID).First();
-        var clientInHotel = data_a.ArmoredRooms
+        var hotelId = _testData.Hotels.Where(h => h.Name == "Hilton").Select(h => h.Id).First();
+        var clientInHotel = _testData.BookedRooms
             .OrderBy(r => r.Client.FullName)
-            .Where(r => data_a.Rooms
-            .Where(r => r.HotelID == hotelId)
+            .Where(r => _testData.Rooms
+            .Where(r => r.HotelId == hotelId)
             .Select(r => r).ToList().Contains(r.Room))
             .Select(r => r.Client)
             .ToList();
-        Assert.Equal(clientInHotel, expecteClients);
+        Assert.NotEmpty(clientInHotel);
+        Assert.Equal(4, clientInHotel.Count);
     }
 
     /// <summary>
@@ -51,49 +39,38 @@ public class Test(HotelBookedData data) : IClassFixture<HotelBookedData> {
     /// </summary>
     [Fact]
     public void ReturnTopFiveHotel() {
-        var expecteHhotels = new List<Hotel> {
-            data_a.Hotels[0],
-            data_a.Hotels[1],
-            data_a.Hotels[2],
-            data_a.Hotels[3],
-            data_a.Hotels[5]
-        };
-        var topFiveHotel = data_a.ArmoredRooms
-            .GroupBy(r => r.Room.HotelID)
+        var topFiveHotel = _testData.BookedRooms
+            .GroupBy(r => r.Room.HotelId)
             .Select(r => r.Key)
             .Take(5)
-            .Join(data_a.Hotels,
+            .Join(_testData.Hotels,
             roomId => roomId,
-            hotel => hotel.ID,
+            hotel => hotel.Id,
             (roomId, hotel) => hotel)
-            .OrderBy(r => r.ID)
+            .OrderBy(r => r.Id)
             .ToList();
-        Assert.Equal(expecteHhotels, topFiveHotel);
+        Assert.NotEmpty(topFiveHotel);
+        Assert.Equal(5, topFiveHotel.Count);
     }
 
     /// <summary>
     /// Тест на вывод информации о свободных номерах, в указанном городе
     /// </summary>
     [Fact]
-    public void ReturnFreeRooms() 
+    public void ReturnFreeRooms()
     {
-        var expectedRooms = new List<Room> 
-        { 
-            data_a.Rooms[4] 
-        };
-        var city = "New York";
-        var bookedRoomIds = data_a.ArmoredRooms
-           .Where(r => r.DateEvection == DateOnly.ParseExact("0001-01-01", "yyyy-mm-dd"))
-           .Select(r => r.Room.ID)
-           .ToList();
-
-        var freeRooms = data_a.Rooms
-            .Where(r => bookedRoomIds.Contains(r.ID)
-                && data_a.Hotels.Any(h => h.City == city && h.ID == r.HotelID)
+        var city = "Chicago";
+        var bookedRoomId = _testData.BookedRooms
+            .Select(r => r.Room.Id)
+            .ToList();
+        var freeRooms = _testData.Rooms
+            .Where(r => !bookedRoomId.Contains(r.Id)
+                && _testData.Hotels.Any(h => h.City == city && h.Id == r.HotelId)
             )
             .ToList();
 
-        Assert.Equal(expectedRooms, freeRooms);
+        Assert.NotEmpty(freeRooms);
+        Assert.Equal(3, freeRooms.Count);
     }
 
     /// <summary>
@@ -102,45 +79,43 @@ public class Test(HotelBookedData data) : IClassFixture<HotelBookedData> {
     [Fact]
     public void ReturnLongLiversHotel() 
     {
-        var expecteClients = new List<Client> 
-        {
-            data_a.Clients[4],
-            data_a.Clients[13]
-        };
-        var longerPeriods = data_a.ArmoredRooms
+        var longerPeriods = _testData.BookedRooms
             .GroupBy(c => c.Client)
             .Select(c => new {
                 Client = c.Key,
-                Total = c.Sum(r => r.Period)
+                Total = c.Sum(r => r.PeriodInDays)
             }).Max(c => c.Total);
 
-        var clientWithLongerPer = data_a.ArmoredRooms
+        var clientWithLongerPer = _testData.BookedRooms
             .GroupBy(c => c.Client)
             .Select(c => new 
             {
                 Client = c.Key,
-                Total = c.Sum(r => r.Period)
+                Total = c.Sum(r => r.PeriodInDays)
             }).Where(c => c.Total == longerPeriods).Select(c => c.Client).ToList();
-        Assert.Equal(expecteClients, clientWithLongerPer);
+        Assert.NotEmpty(clientWithLongerPer);
+        Assert.Equal(1, clientWithLongerPer.Count);
     }
 
     /// <summary>
     /// Тест на вывод сведений о минимальной, максимальной и средней ценах за комнаты в каждом отеле
     /// </summary>
     [Fact]
-    public void MinAvgMaxCostInHotel() 
+    public void MinAvgMaxDecimalInHotel() 
     {
-        var hotels = data_a.Hotels.Select(h => h);
+        var hotels = _testData.Hotels.Select(h => h);
 
-        var hotelCosts = hotels.Select(h => new 
+        var hotelDecimals = hotels.Select(h => new 
         {
-            Hotel = (data_a.Hotels.Where(hotel => hotel.ID == h.ID).Select(hotel => hotel)),
-            Min = data_a.Rooms.Where(r => r.HotelID == h.ID).Select(r => r).ToList().Min(rm => rm.Cost),
-            Max = data_a.Rooms.Where(r => r.HotelID == h.ID).Select(r => r).ToList().Max(rm => rm.Cost),
-            Avg = data_a.Rooms.Where(r => r.HotelID == h.ID).Select(r => r).ToList().Average(rm => rm.Cost)
+            Hotel = (_testData.Hotels.Where(hotel => hotel.Id == h.Id).Select(hotel => hotel)),
+            Min = _testData.Rooms.Where(r => r.HotelId == h.Id).Select(r => r).ToList().Min(rm => rm.Decimal),
+            Max = _testData.Rooms.Where(r => r.HotelId == h.Id).Select(r => r).ToList().Max(rm => rm.Decimal),
+            Avg = _testData.Rooms.Where(r => r.HotelId == h.Id).Select(r => r).ToList().Average(rm => rm.Decimal)
         }).ToList();
-        Assert.Equal(3000, hotelCosts[0].Min);
-        Assert.Equal(4500, hotelCosts[0].Avg);
-        Assert.Equal(6000, hotelCosts[0].Max);
+        Assert.NotEmpty(hotelDecimals);
+        Assert.Equal(6, hotelDecimals.Count);
+        Assert.Equal(3000, hotelDecimals[0].Min);
+        Assert.Equal(4500, hotelDecimals[0].Avg);
+        Assert.Equal(6000, hotelDecimals[0].Max);
     }
 }

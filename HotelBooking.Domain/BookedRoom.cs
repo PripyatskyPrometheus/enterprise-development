@@ -1,32 +1,32 @@
 ﻿namespace HotelBooking.Domain;
 
 /// <summary>
-///     Забронированные номера
+/// Забронированные номера
 /// </summary>
 public class BookedRoom 
 {
     /// <summary>
-    ///     Клиент  
+    /// Клиент  
     /// </summary>
     public required Client Client { get; set; }
 
     /// <summary>
-    ///     Комната
+    /// Комната
     /// </summary
     public required Room Room { get; set; }
 
     /// <summary>
-    ///     Дата заселения
+    /// Дата заселения
     /// </summary>
     public required DateOnly DateArrival { get; set; }
 
     /// <summary>
-    ///     Дата выселения
+    /// Дата выселения
     /// </summary>
-    public required DateOnly DateEvection { get; set; }
+    public DateOnly? DateEvection { get; set; }
 
     /// <summary>
-    ///     Период
+    /// Период
     /// </summary>
-    public required int Period { get; set; }
+    public required int PeriodInDays { get; set; }
 }
