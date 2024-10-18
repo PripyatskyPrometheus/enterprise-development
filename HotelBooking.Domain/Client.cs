@@ -3,7 +3,7 @@
 /// <summary>
 /// Данные клиента
 /// </summary>
-public class Client 
+public class Client
 {
     /// <summary>
     /// Идентификатор клиента

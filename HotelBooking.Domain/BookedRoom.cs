@@ -3,7 +3,7 @@
 /// <summary>
 /// Забронированные номера
 /// </summary>
-public class BookedRoom 
+public class BookedRoom
 {
     /// <summary>
     /// Клиент  

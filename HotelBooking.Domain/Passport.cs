@@ -3,14 +3,14 @@
 /// <summary>
 /// Паспортные данные клиента
 /// </summary>
-public class Passport 
+public class Passport
 {
     /// <summary>
     /// Идентификатор паспорта
     /// </summary>
     public required int Id { get; set; }
 
-/// <summary>
+    /// <summary>
     /// Серия
     /// </summary>
     public required int Series { get; set; }

@@ -3,7 +3,7 @@
 /// <summary>
 /// Отель
 /// </summary>
-public class Hotel 
+public class Hotel
 {
     /// <summary>
     /// Идентификатор отеля

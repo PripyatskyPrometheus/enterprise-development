@@ -3,7 +3,7 @@
 /// <summary>
 /// Инофрмация о номере
 /// </summary>
-public class Room 
+public class Room
 {
     /// <summary>
     /// Идентификатор номера
@@ -23,7 +23,7 @@ public class Room
     /// <summary>
     /// Цена
     /// </summary>
-    public required int Decimal { get; set; }
+    public required decimal Cost { get; set; }
 
     /// <summary>
     /// Id отеля

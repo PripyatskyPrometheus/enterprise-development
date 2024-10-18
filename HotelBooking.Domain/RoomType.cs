@@ -3,7 +3,7 @@
 /// <summary>
 /// Типы номеров
 /// </summary>
-public class RoomType 
+public class RoomType
 {
     /// <summary>
     /// Идентификатор типа номера
@@ -13,5 +13,5 @@ public class RoomType
     /// <summary>
     /// Название
     /// </summary>
-    public required string NameRoom { get; set; }
+    public required string TypeName { get; set; }
 }
