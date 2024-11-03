@@ -1,9 +1,9 @@
-﻿namespace HotelBooking.Domain;
+﻿namespace HotelBooking.API.Dto;
 
 /// <summary>
-/// Типы номеров
+/// Класс DTO для метода POST для типа комнат
 /// </summary>
-public class RoomType
+public class RoomTypePostDto
 {
     /// <summary>
     /// Идентификатор типа номера

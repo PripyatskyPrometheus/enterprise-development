@@ -1,9 +1,10 @@
-﻿namespace HotelBooking.Domain;
+﻿using HotelBooking.Domain.Enity;
+namespace HotelBooking.API.Dto;
 
 /// <summary>
-/// Инофрмация о номере
+/// Класс DTO для метода POST для комнат
 /// </summary>
-public class Room
+public class RoomPostDto
 {
     /// <summary>
     /// Идентификатор номера
