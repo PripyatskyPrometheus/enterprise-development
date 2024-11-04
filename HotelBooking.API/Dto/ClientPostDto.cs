@@ -1,4 +1,4 @@
-﻿using HotelBooking.Domain.Enity;
+﻿using HotelBooking.Domain.Entity;
 
 /// <summary>
 /// Класс DTO для метода POST для клиента

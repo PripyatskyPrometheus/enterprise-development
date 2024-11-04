@@ -1,19 +1,26 @@
+using HotelBooking.API;
+using HotelBooking.API.Repository;
+using HotelBooking.API.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(Mapping));
+
+builder.Services.AddSingleton<HotelBookingDbContext>();
+builder.Services.AddSingleton<HotelRepository>();
+builder.Services.AddSingleton<HotelService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    _ = app.UseSwagger();
+    _ = app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

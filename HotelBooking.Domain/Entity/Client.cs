@@ -1,4 +1,4 @@
-﻿namespace HotelBooking.Domain.Enity;
+﻿namespace HotelBooking.Domain.Entity;
 
 /// <summary>
 /// Данные клиента

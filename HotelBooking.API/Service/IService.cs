@@ -1,19 +1,20 @@
-﻿namespace HotelBooking.Domain.Repository;
+﻿namespace HotelBooking.API.Service;
 
 /// <summary>
-/// Интерфейс базовых методов доступа к данным
+/// Интерфейс сервера
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public interface IRepository<T>
+/// <typeparam name="DTO"></typeparam>
+public interface IService<T, DTO>
 {
     /// <summary>
-    /// Получение всех объектов
+    /// Возвращение объекта
     /// </summary>
     /// <returns></returns>
     public IEnumerable<T> GetAll();
 
     /// <summary>
-    /// Получение объекта по идентификатору
+    /// Возвращение объекта по Id
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -22,15 +23,16 @@ public interface IRepository<T>
     /// <summary>
     /// Создание объекта
     /// </summary>
-    /// <param name="entity"></param>
-    public void Post(T entity);
+    /// <param name="postDto"></param>
+    /// <returns></returns>
+    public int Post(DTO postDto);
 
     /// <summary>
     /// Изменение существующего объекта
     /// </summary>
-    /// <param name="entity"></param>
+    /// <param name="putEntity"></param>
     /// <returns></returns>
-    public bool Put(T entity);
+    public T? Put(T putEntity);
 
     /// <summary>
     /// Удаление объекта

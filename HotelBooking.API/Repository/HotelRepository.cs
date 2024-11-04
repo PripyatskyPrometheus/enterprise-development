@@ -1,23 +1,26 @@
-﻿using HotelBooking.Domain.Enity;
+﻿using HotelBooking.API.Dto;
 
-namespace HotelBooking.Domain.Repository;
+namespace HotelBooking.API.Repository;
 
-public class HotelRepository(HotelBookingDbContext context) : IRepository<Hotel>
+public class HotelRepository(HotelBookingDbContext context) : IRepository<HotelGetDto>
 {
     /// <inheritdoc />
-    public IEnumerable<Hotel> GetAll() => context.Hotels;
+    public IEnumerable<HotelGetDto> GetAll() => context.Hotels;
 
     /// <inheritdoc />
-    public Hotel? GetById(int id) => context.Hotels.Find(x => x.Id == id);
+    public HotelGetDto? GetById(int id) => context.Hotels.Find(x => x.Id == id);
 
     /// <inheritdoc />
-    public void Post(Hotel hotel)
+    public int Post(HotelGetDto hotel)
     {
+        int newId = context.Hotels.Count > 0 ? context.Hotels.Max(h => h.Id) + 1 : 1;
+        hotel.Id = newId;
         context.Hotels.Add(hotel);
+        return newId;
     }
 
     /// <inheritdoc />
-    public bool Put(Hotel hotel)
+    public bool Put(HotelGetDto hotel)
     {
         var oldValue = GetById(hotel.Id);
 

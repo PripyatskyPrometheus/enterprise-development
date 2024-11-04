@@ -1,19 +1,17 @@
-﻿namespace HotelBooking.Domain.Enity;
+﻿namespace HotelBooking.API.Dto;
 
-/// <summary>
-/// Забронированные номера
-/// </summary>
-public class BookedRoom
+
+public class BookedRoomGetDto
 {
     /// <summary>
     /// Клиент  
     /// </summary>
-    public required Client Client { get; set; }
+    public required ClientGetDto Client { get; set; }
 
     /// <summary>
     /// Комната
     /// </summary
-    public required Room Room { get; set; }
+    public required RoomGetDto Room { get; set; }
 
     /// <summary>
     /// Дата заселения

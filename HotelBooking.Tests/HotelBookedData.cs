@@ -1,4 +1,4 @@
-﻿using HotelBooking.Domain.Enity;
+﻿using HotelBooking.Domain.Entity;
 namespace HotelBooking.Tests;
 
 public class HotelBookedData
