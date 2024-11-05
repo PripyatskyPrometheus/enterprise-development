@@ -25,9 +25,10 @@ public class RoomTypeService(RoomTypeRepository repository, IMapper mapper) : IS
     }
 
     /// <inheritdoc />
-    public RoomTypeGetDto? Put(RoomTypeGetDto putDto)
+    public RoomTypeGetDto? Put(int id, RoomTypePostDto putDto)
     {
         var type = mapper.Map<RoomTypeGetDto>(putDto);
+        type.Id = id;
         bool isUpdated = repository.Put(type);
         if (isUpdated)
             return repository.GetById(type.Id);

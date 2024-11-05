@@ -24,13 +24,13 @@ public class ClientService(ClientRepository repository, IMapper mapper) : IServi
     public int Post(ClientPostDto postDto)
     {
         return repository.Post(mapper.Map<ClientGetDto>(postDto));
-
     }
 
     /// <inheritdoc />
-    public ClientGetDto? Put(ClientGetDto putDto)
+    public ClientGetDto? Put(int id, ClientPostDto putDto)
     {
         var client = mapper.Map<ClientGetDto>(putDto);
+        client.Id = id;
         bool isUpdated = repository.Put(client);
         if (isUpdated)
             return repository.GetById(client.Id);

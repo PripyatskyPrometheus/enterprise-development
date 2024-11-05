@@ -26,9 +26,10 @@ public class PassportService(PassportRepository repository, IMapper mapper) : IS
     }
 
     /// <inheritdoc />
-    public PassportGetDto? Put(PassportGetDto putDto)
+    public PassportGetDto? Put(int id, PassportPostDto putDto)
     {
         var passport = mapper.Map<PassportGetDto>(putDto);
+        passport.Id = id;
         bool isUpdated = repository.Put(passport);
         if (isUpdated)
             return repository.GetById(passport.Id);

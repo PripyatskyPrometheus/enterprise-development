@@ -20,7 +20,7 @@ namespace HotelBooking.API.Dto
         /// <summary>
         /// Паспорт
         /// </summary>
-        public required Passport PassportData { get; set; }
+        public required PassportPostDto PassportData { get; set; }
 
         /// <summary>
         /// Дата рождения

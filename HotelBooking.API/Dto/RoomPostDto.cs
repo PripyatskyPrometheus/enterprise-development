@@ -14,7 +14,7 @@ public class RoomPostDto
     /// <summary>
     /// Тип номера
     /// </summary>
-    public required RoomType Type { get; set; }
+    public required RoomTypePostDto Type { get; set; }
 
     /// <summary>
     /// Вместимость

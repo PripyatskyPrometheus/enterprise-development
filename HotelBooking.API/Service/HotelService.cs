@@ -22,13 +22,13 @@ public class HotelService(HotelRepository repository, IMapper mapper) : IService
     public int Post(HotelPostDto postDto)
     {
         return repository.Post(mapper.Map<HotelGetDto>(postDto));
-
     }
 
     /// <inheritdoc />
-    public HotelGetDto? Put(HotelGetDto putDto)
+    public HotelGetDto? Put(int id, HotelPostDto putDto)
     {
         var hotel = mapper.Map<HotelGetDto>(putDto);
+        hotel.Id = id;
         bool isUpdated = repository.Put(hotel);
         if (isUpdated)
             return isUpdated ? repository.GetById(hotel.Id) : null;

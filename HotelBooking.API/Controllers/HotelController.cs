@@ -2,15 +2,13 @@
 using HotelBooking.API.Service;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace HotelBooking.API.Controllers;
 
 /// <summary>
 /// Контроллер для управления отелями
 /// </summary>
-[Route("api/[controller]")]
 [ApiController]
+[Route("api/[controller]")]
 public class HotelController(HotelService service) : ControllerBase
 {
     /// <summary>
@@ -18,7 +16,7 @@ public class HotelController(HotelService service) : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public ActionResult<IEnumerable<HotelGetDto>> Get()
+    public ActionResult<IEnumerable<HotelGetDto>> GetAll()
     {
         var hotels = service.GetAll();
         return Ok(hotels);
@@ -30,11 +28,11 @@ public class HotelController(HotelService service) : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public ActionResult<HotelGetDto> Get(int id)
+    public ActionResult<HotelGetDto> GetById(int id)
     {
         var hotel = service.GetById(id);
         if (hotel == null)
-            return NotFound(); // Возвращает статус 404, если не найден
+            return NotFound($"Отель с таким id {id} не найден.");
         return Ok(hotel);
     }
 
@@ -43,13 +41,10 @@ public class HotelController(HotelService service) : ControllerBase
     /// </summary>
     /// <param name="value"></param>
     [HttpPost]
-    public ActionResult<int> Post([FromBody] HotelPostDto postDto)
+    public ActionResult<object> Post([FromBody] HotelPostDto postDto)
     {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState); // Проверка валидности данных
-
         var newId = service.Post(postDto);
-        return CreatedAtAction(nameof(Get), new { id = newId }, newId); // Возвращает 201 с ссылкой на новый объект
+        return Ok(new { id = newId });
     }
 
     /// <summary>
@@ -58,18 +53,12 @@ public class HotelController(HotelService service) : ControllerBase
     /// <param name="id"></param>
     /// <param name="value"></param>
     [HttpPut("{id}")]
-    public ActionResult<HotelGetDto> Put(int id, [FromBody] HotelGetDto putDto)
+    public ActionResult<HotelGetDto> Put(int id, [FromBody] HotelPostDto putDto)
     {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        putDto.Id = id; // Устанавливаем ID перед обновлением
-        var updatedHotel = service.Put(putDto);
-
+        var updatedHotel = service.Put(id, putDto);
         if (updatedHotel == null)
-            return NotFound(); // Отель не найден, возвращаем 404
-
-        return Ok(updatedHotel); // Возвращаем обновленный отель
+            return NotFound($"Отель с таким id {id} не найден."); 
+        return Ok(updatedHotel); 
     }
 
     /// <summary>
@@ -78,12 +67,12 @@ public class HotelController(HotelService service) : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete("{id}")]
-    public ActionResult Delete(int id)
+    public IActionResult Delete(int id)
     {
         var isDeleted = service.Delete(id);
         if (!isDeleted)
-            return NotFound(); // Если отель не найден, возвращаем 404
+            return NotFound($"Отель с таким id {id} не найден."); 
 
-        return NoContent(); // Успешное удаление, возвращаем статус 204
+        return Ok();
     }
 }

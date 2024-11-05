@@ -10,12 +10,12 @@ public class BookedRoomPostDto
     /// <summary>
     /// Клиент  
     /// </summary>
-    public required Client Client { get; set; }
+    public required ClientPostDto Client { get; set; }
 
     /// <summary>
     /// Комната
     /// </summary
-    public required Room Room { get; set; }
+    public required RoomPostDto Room { get; set; }
 
     /// <summary>
     /// Дата заселения

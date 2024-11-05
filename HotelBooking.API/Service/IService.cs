@@ -32,7 +32,7 @@ public interface IService<T, DTO>
     /// </summary>
     /// <param name="putEntity"></param>
     /// <returns></returns>
-    public T? Put(T putEntity);
+    public T? Put(int id, DTO putDto);
 
     /// <summary>
     /// Удаление объекта
