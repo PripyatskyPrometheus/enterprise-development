@@ -1,13 +1,10 @@
 ﻿namespace HotelBooking.API.Dto;
 
-
-public class ClientGetDto
+/// <summary>
+/// DTO класс для возвращения значений класса Client
+/// </summary>
+public class ClientDto
 {
-    /// <summary>
-    /// Идентификатор клиента
-    /// </summary>
-    public required int Id { get; set; }
-
     /// <summary>
     /// ФИО 
     /// </summary>
@@ -16,10 +13,10 @@ public class ClientGetDto
     /// <summary>
     /// Паспорт
     /// </summary>
-    public required PassportGetDto PassportData { get; set; }
+    public required int PassportDataId { get; set; }
 
     /// <summary>
     /// Дата рождения
     /// </summary>
-    public required DateOnly BirthOfDay { get; set; }
+    public required string BirthOfDay { get; set; }
 }

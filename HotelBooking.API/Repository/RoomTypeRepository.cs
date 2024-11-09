@@ -1,47 +1,37 @@
-﻿using HotelBooking.API.Dto;
+﻿using HotelBooking.Domain.Entity;
 
 namespace HotelBooking.API.Repository;
 
-/// <summary>
-/// Repository for working with hotel room data
-/// </summary>
-public class RoomTypeRepository(HotelBookingDbContext context) : IRepository<RoomTypeGetDto>
+public class RoomTypeRepository : IRepository<RoomType>
 {
-    /// <inheritdoc />
-    public IEnumerable<RoomTypeGetDto> GetAll() => context.RoomTypes;
+    private readonly List<RoomType> _roomType = [];
+    private int _roomTypeId = 0;
 
-    /// <inheritdoc />
-    public RoomTypeGetDto? GetById(int id) => context.RoomTypes.Find(x => x.Id == id);
+    public IEnumerable<RoomType> GetAll() => _roomType;
 
-    /// <inheritdoc />
-    public int Post(RoomTypeGetDto type)
+    public RoomType? GetById(int id) => _roomType.Find(x => x.Id == id);
+
+    public void Post(RoomType entity)
     {
-        int newId = context.RoomTypes.Count > 0 ? context.RoomTypes.Max(h => h.Id) + 1 : 1;
-        type.Id = newId;
-        context.RoomTypes.Add(type);
-        return newId;
+        entity.Id = ++_roomTypeId;
+        _roomType.Add(entity);
     }
 
-    /// <inheritdoc />
-    public bool Put(RoomTypeGetDto type)
+    public bool Put(RoomType entity, int id)
     {
-        var oldValue = GetById(type.Id);
-
+        var oldValue = GetById(id);
         if (oldValue == null)
             return false;
-
-        oldValue.TypeName = type.TypeName;
-
+        oldValue.TypeName = entity.TypeName;
         return true;
     }
 
-    /// <inheritdoc />
     public bool Delete(int id)
     {
         var type = GetById(id);
         if (type == null)
             return false;
-        _ = context.RoomTypes.Remove(type);
+        _roomType.Remove(type);
         return true;
     }
 }

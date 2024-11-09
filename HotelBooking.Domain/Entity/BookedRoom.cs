@@ -6,6 +6,11 @@
 public class BookedRoom
 {
     /// <summary>
+    /// Идентификатор забронированных комнат
+    /// </summary>
+    public required int Id { get; set; }
+
+    /// <summary>
     /// Клиент  
     /// </summary>
     public required Client Client { get; set; }
@@ -23,7 +28,7 @@ public class BookedRoom
     /// <summary>
     /// Дата выселения
     /// </summary>
-    public DateOnly? DateEvection { get; set; }
+    public required DateOnly DateEvection { get; set; }
 
     /// <summary>
     /// Период

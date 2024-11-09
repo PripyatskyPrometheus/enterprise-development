@@ -1,23 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HotelBooking.API.Dto;
-using HotelBooking.API.Service;
+using HotelBooking.API.Repository;
+using HotelBooking.Domain.Entity;
+using AutoMapper;
 
 namespace HotelBooking.API.Controllers;
 
 /// <summary>
 /// Контроллер для работы с номерами
 /// </summary>
-[ApiController]
 [Route("[controller]")]
-public class RoomController(RoomService service) : ControllerBase
+[ApiController]
+public class RoomController(IRepository<Room> repository, IRepository<RoomType> repositoryRoomType, IMapper mapper) : ControllerBase
 {
     /// <summary>
     /// Получение информации об о всех номерах
     /// </summary>
     [HttpGet]
-    public ActionResult<IEnumerable<RoomGetDto>> GetAll()
+    public ActionResult<IEnumerable<RoomDto>> GetAll()
     {
-        var room = service.GetAll();
+        var room = repository.GetAll();
         return Ok(room);
     }
 
@@ -25,11 +27,11 @@ public class RoomController(RoomService service) : ControllerBase
     /// Получение информации о номере через id
     /// </summary>
     [HttpGet("{id}")]
-    public ActionResult<RoomGetDto> GetById(int id)
+    public ActionResult<RoomDto> GetById(int id)
     {
-        var room = service.GetById(id);
+        var room = repository.GetById(id);
         if (room == null)
-            return NotFound($"Номера с id {id} нет.");
+            return NotFound("Номера с таким Id не существует");
         return Ok(room);
     }
 
@@ -37,23 +39,34 @@ public class RoomController(RoomService service) : ControllerBase
     /// Добавление нового номера
     /// </summary>
     [HttpPost]
-    public ActionResult<object> Post([FromBody] RoomPostDto postDto)
+    public ActionResult Post([FromBody] RoomDto value, RoomTypeDto value1)
     {
-        var newId = service.Post(postDto);
-        return Ok(new { id = newId });
+        if (repositoryRoomType.GetById(value.TypeId) == null)
+            NotFound("Типа с таким Id не существует");
+        var room = mapper.Map<Room>(value);
+        if (repositoryRoomType.GetById(value.TypeId) != mapper.Map<RoomType>(value1))
+            NotFound();
+        room.Type = mapper.Map<RoomType>(value1);
+        repository.Post(room);
+        return Ok(room);
     }
 
     /// <summary>
     /// Изменение данных о номере через id
     /// </summary>
     [HttpPut("{id}")]
-    public ActionResult<RoomGetDto> Put(int id, [FromBody] RoomPostDto putDto)
+    public ActionResult Put(int id, [FromBody] RoomDto value, RoomTypeDto value1)
     {
-        var updatedRoom = service.Put(id, putDto);
-        if (updatedRoom == null)
-            return NotFound($"Номера с id {id} нет.");
-
-        return Ok(updatedRoom);
+        if (repository.GetById(id) == null)
+            NotFound("Номера с таким Id не существует");
+        if (repositoryRoomType.GetById(value.TypeId) == null)
+            NotFound("Типа с таким Id не существует");
+        var room = mapper.Map<Room>(value);
+        if (repositoryRoomType.GetById(value.TypeId) != mapper.Map<RoomType>(value1))
+            NotFound();
+        room.Type = mapper.Map<RoomType>(value1);
+        repository.Put(room, id);
+        return Ok(room);
     }
 
     /// <summary>
@@ -62,10 +75,9 @@ public class RoomController(RoomService service) : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var isDeleted = service.Delete(id);
-        if (!isDeleted)
-            return NotFound($"Номера с id {id} нет.");
-
-        return Ok($"Номер удалён");
+        if (repository.GetById(id) == null)
+            return NotFound("Номера с таким Id не существует");
+        repository.Delete(id);
+        return Ok();
     }
 }

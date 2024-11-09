@@ -1,16 +1,14 @@
 ﻿namespace HotelBooking.API.Dto;
 
-public class RoomGetDto
+/// <summary>
+/// DTO класс для возвращения значений Room
+/// </summary>
+public class RoomDto
 {
-    /// <summary>
-    /// Идентификатор номера
-    /// </summary>
-    public required int Id { get; set; }
-
     /// <summary>
     /// Тип номера
     /// </summary>
-    public required RoomTypeGetDto Type { get; set; }
+    public required int TypeId { get; set; }
 
     /// <summary>
     /// Вместимость

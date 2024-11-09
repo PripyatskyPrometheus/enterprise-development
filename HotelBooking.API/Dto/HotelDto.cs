@@ -1,14 +1,10 @@
 ﻿namespace HotelBooking.API.Dto;
 
 /// <summary>
-/// Класс DTO для метода POST для отеля
+/// DTO класс для возвращения значений класса Hotel
 /// </summary>
-public class HotelPostDto
+public class HotelDto
 {
-    /// <summary>
-    /// Идентификатор отеля
-    /// </summary>
-    public required int Id { get; set; }
     /// <summary>
     /// Название
     /// </summary>

@@ -223,21 +223,21 @@ public class HotelBookedData
 
         BookedRooms =
         [
-            new BookedRoom { Client = Clients[0], DateArrival = new DateOnly(2024, 4, 28), PeriodInDays = 10, Room = Rooms[0], DateEvection =  new DateOnly(2024, 5, 8) },
-            new BookedRoom { Client = Clients[11], DateArrival = new DateOnly(2024, 4, 28), PeriodInDays = 10, Room = Rooms[11], DateEvection =  new DateOnly(2024, 05, 8) },
-            new BookedRoom { Client = Clients[1], DateArrival = new DateOnly(2024, 5, 5), PeriodInDays = 5, Room = Rooms[1], DateEvection =  new DateOnly(2024, 5, 10) },
-            new BookedRoom { Client = Clients[2], DateArrival = new DateOnly(2024, 5, 15), PeriodInDays = 7, Room = Rooms[2], DateEvection =  new DateOnly(2024, 5, 22) },
-            new BookedRoom { Client = Clients[3], DateArrival = new DateOnly(2024, 6, 1), PeriodInDays = 3, Room = Rooms[3], DateEvection =  new DateOnly(2024, 6, 4) },
-            new BookedRoom { Client = Clients[5], DateArrival = new DateOnly(2024, 6, 20), PeriodInDays = 9, Room = Rooms[5], DateEvection =  new DateOnly(2024, 06, 29) },
-            new BookedRoom { Client = Clients[6], DateArrival = new DateOnly(2024, 7, 1), PeriodInDays = 6, Room = Rooms[6], DateEvection =  new DateOnly(2024, 7, 7) },
-            new BookedRoom { Client = Clients[7], DateArrival = new DateOnly(2024, 7, 10), PeriodInDays = 11, Room = Rooms[7], DateEvection =  new DateOnly(2024, 7, 21) },
-            new BookedRoom { Client = Clients[8], DateArrival = new DateOnly(2024, 7, 20), PeriodInDays = 8, Room = Rooms[8], DateEvection =  new DateOnly(2024, 7, 28) },
-            new BookedRoom { Client = Clients[9], DateArrival = new DateOnly(2024, 8, 1), PeriodInDays = 4, Room = Rooms[9], DateEvection =  new DateOnly(2024, 8, 5) },
-            new BookedRoom { Client = Clients[10], DateArrival = new DateOnly(2024, 8, 10), PeriodInDays = 12, Room = Rooms[10], DateEvection =  new DateOnly(2024, 8, 22) },
-            new BookedRoom { Client = Clients[12], DateArrival = new DateOnly(2024, 6, 1), PeriodInDays= 3, Room = Rooms[14], DateEvection =  new DateOnly(2024, 6, 4) },
-            new BookedRoom { Client = Clients[13], DateArrival = new DateOnly(2024, 6 ,10), PeriodInDays = 14, Room = Rooms[15], DateEvection =  new DateOnly(2024, 6, 24) },
-            new BookedRoom { Client = Clients[14], DateArrival = new DateOnly(2024, 6, 20), PeriodInDays = 9, Room = Rooms[20], DateEvection =  new DateOnly(2024, 6, 29) },
-            new BookedRoom { Client = Clients[15], DateArrival = new DateOnly(2024 ,7, 1), PeriodInDays = 6, Room = Rooms[16],  DateEvection =  new DateOnly(2024, 7, 7) }
+            new BookedRoom { Id = 0, Client = Clients[0], DateArrival = new DateOnly(2024, 4, 28), PeriodInDays = 10, Room = Rooms[0], DateEvection =  new DateOnly(2024, 5, 8) },
+            new BookedRoom { Id = 1, Client = Clients[11], DateArrival = new DateOnly(2024, 4, 28), PeriodInDays = 10, Room = Rooms[11], DateEvection =  new DateOnly(2024, 05, 8) },
+            new BookedRoom { Id = 2, Client = Clients[1], DateArrival = new DateOnly(2024, 5, 5), PeriodInDays = 5, Room = Rooms[1], DateEvection =  new DateOnly(2024, 5, 10) },
+            new BookedRoom { Id = 3, Client = Clients[2], DateArrival = new DateOnly(2024, 5, 15), PeriodInDays = 7, Room = Rooms[2], DateEvection =  new DateOnly(2024, 5, 22) },
+            new BookedRoom { Id = 4, Client = Clients[3], DateArrival = new DateOnly(2024, 6, 1), PeriodInDays = 3, Room = Rooms[3], DateEvection =  new DateOnly(2024, 6, 4) },
+            new BookedRoom { Id = 5, Client = Clients[5], DateArrival = new DateOnly(2024, 6, 20), PeriodInDays = 9, Room = Rooms[5], DateEvection =  new DateOnly(2024, 06, 29) },
+            new BookedRoom { Id = 6, Client = Clients[6], DateArrival = new DateOnly(2024, 7, 1), PeriodInDays = 6, Room = Rooms[6], DateEvection =  new DateOnly(2024, 7, 7) },
+            new BookedRoom { Id = 7, Client = Clients[7], DateArrival = new DateOnly(2024, 7, 10), PeriodInDays = 11, Room = Rooms[7], DateEvection =  new DateOnly(2024, 7, 21) },
+            new BookedRoom { Id = 8, Client = Clients[8], DateArrival = new DateOnly(2024, 7, 20), PeriodInDays = 8, Room = Rooms[8], DateEvection =  new DateOnly(2024, 7, 28) },
+            new BookedRoom { Id = 9, Client = Clients[9], DateArrival = new DateOnly(2024, 8, 1), PeriodInDays = 4, Room = Rooms[9], DateEvection =  new DateOnly(2024, 8, 5) },
+            new BookedRoom { Id = 10, Client = Clients[10], DateArrival = new DateOnly(2024, 8, 10), PeriodInDays = 12, Room = Rooms[10], DateEvection =  new DateOnly(2024, 8, 22) },
+            new BookedRoom { Id = 11, Client = Clients[12], DateArrival = new DateOnly(2024, 6, 1), PeriodInDays= 3, Room = Rooms[14], DateEvection =  new DateOnly(2024, 6, 4) },
+            new BookedRoom { Id = 12, Client = Clients[13], DateArrival = new DateOnly(2024, 6 ,10), PeriodInDays = 14, Room = Rooms[15], DateEvection =  new DateOnly(2024, 6, 24) },
+            new BookedRoom { Id = 13, Client = Clients[14], DateArrival = new DateOnly(2024, 6, 20), PeriodInDays = 9, Room = Rooms[20], DateEvection =  new DateOnly(2024, 6, 29) },
+            new BookedRoom { Id = 14, Client = Clients[15], DateArrival = new DateOnly(2024 ,7, 1), PeriodInDays = 6, Room = Rooms[16],  DateEvection =  new DateOnly(2024, 7, 7) }
         ];
     }
 }

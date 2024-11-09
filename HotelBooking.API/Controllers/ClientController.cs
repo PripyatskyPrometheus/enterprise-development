@@ -1,35 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HotelBooking.API.Dto;
-using HotelBooking.API.Service;
+using HotelBooking.API.Repository;
+using HotelBooking.Domain.Entity;
+using AutoMapper;
 
 namespace HotelBooking.API.Controllers;
 
 /// <summary>
 /// Контроллер для работы с клиентами
 /// </summary>
+[Route("api/[controller]")]
 [ApiController]
-[Route("[controller]")]
-public class ClientController(ClientService service) : ControllerBase
+public class ClientController(IRepository<Client> repository, IRepository<Passport> repositoryPassport, IMapper mapper) : ControllerBase
 {
     /// <summary>
     /// Получение информации об о всех клиентах
     /// </summary>
     [HttpGet]
-    public ActionResult<IEnumerable<ClientGetDto>> GetAll()
+    public ActionResult<IEnumerable<ClientDto>> GetAll()
     {
-        var client = service.GetAll();
-        return Ok(client);
+        return Ok(repository.GetAll());
     }
 
     /// <summary>
     /// Получение информации о клиентах через id
     /// </summary>
     [HttpGet("{id}")]
-    public ActionResult<ClientGetDto> GetById(int id)
+    public ActionResult<ClientDto> GetById(int id)
     {
-        var client = service.GetById(id);
+        var client = repository.GetById(id);
         if (client == null)
-            return NotFound($"Client with id {id} not found.");
+            return NotFound("Клиента с таким Id не существует");
         return Ok(client);
     }
 
@@ -37,23 +38,34 @@ public class ClientController(ClientService service) : ControllerBase
     /// Добавление нового клиента
     /// </summary>
     [HttpPost]
-    public ActionResult<object> Post([FromBody] ClientPostDto postDto)
+    public IActionResult Post([FromBody] ClientDto value, PassportDto value1)
     {
-        var newId = service.Post(postDto);
-        return Ok(new { id = newId });
+        if (repositoryPassport.GetById(value.PassportDataId) == null)
+            return NotFound();
+        var client = mapper.Map<Client>(value);
+        if (mapper.Map<Passport>(value1) != repositoryPassport.GetById(value.PassportDataId))
+            NotFound();
+        client.PassportData = mapper.Map<Passport>(value1);
+        repository.Post(client);
+        return Ok();
     }
 
     /// <summary>
     /// Изменение данных о клиенте через id
     /// </summary>
     [HttpPut("{id}")]
-    public ActionResult<ClientGetDto> Put(int id, [FromBody] ClientPostDto putDto)
+    public IActionResult Put(int id, [FromBody] ClientDto value, PassportDto value1)
     {
-        var updatedClient = service.Put(id, putDto);
-        if (updatedClient == null)
-            return NotFound($"Клиента с таким id {id} не существует.");
-
-        return Ok(updatedClient);
+        if (repository.GetById(id) == null)
+            return NotFound("Клиента с таким Id не существует");
+        if (repositoryPassport.GetById(value.PassportDataId) == null)
+            return NotFound();
+        var client = mapper.Map<Client>(value);
+        if (mapper.Map<Passport>(value1) != repositoryPassport.GetById(value.PassportDataId))
+            NotFound();
+        client.PassportData = mapper.Map<Passport>(value1);
+        repository.Put(client, id);
+        return Ok();
     }
 
     /// <summary>
@@ -62,10 +74,9 @@ public class ClientController(ClientService service) : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var isDeleted = service.Delete(id);
-        if (!isDeleted)
-            return NotFound($"Клиента с таким id {id} не существует.");
-
-        return Ok($"Клиента с таким id {id} удалён.");
+        if (repository.GetById(id) == null)
+            return NotFound("Клиента с таким Id не существует");
+        repository.Delete(id);
+        return Ok();
     }
 }

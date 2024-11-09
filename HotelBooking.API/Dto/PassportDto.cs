@@ -1,15 +1,10 @@
 ﻿namespace HotelBooking.API.Dto;
 
 /// <summary>
-/// Класс DTO для метода POST для паспорта
+/// DTO класс для возвращения значений Passport 
 /// </summary>
-public class PassportPostDto
+public class PassportDto
 {
-    /// <summary>
-    /// Идентификатор паспорта
-    /// </summary>
-    public required int Id { get; set; }
-
     /// <summary>
     /// Серия
     /// </summary>

@@ -23,14 +23,15 @@ public interface IRepository<T>
     /// Создание объекта
     /// </summary>
     /// <param name="entity"></param>
-    public int Post(T entity);
+    public void Post(T entity);
 
     /// <summary>
-    /// Изменение существующего объекта
+    /// Изменение объекта
     /// </summary>
     /// <param name="entity"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
-    public bool Put(T entity);
+    public bool Put(T entity, int id);
 
     /// <summary>
     /// Удаление объекта

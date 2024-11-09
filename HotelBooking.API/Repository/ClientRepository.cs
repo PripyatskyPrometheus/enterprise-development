@@ -1,49 +1,38 @@
-﻿using HotelBooking.API.Dto;
+﻿using HotelBooking.Domain.Entity;
 
 namespace HotelBooking.API.Repository;
 
-/// <summary>
-/// Repository for working with hotel room data
-/// </summary>
-public class ClientRepository(HotelBookingDbContext context) : IRepository<ClientGetDto>
+public class ClientRepository : IRepository<Client>
 {
-    /// <inheritdoc />
-    public IEnumerable<ClientGetDto> GetAll() => context.Clients;
+    private readonly List<Client> _clients = [];
+    private int _clientId = 0;
+    public IEnumerable<Client> GetAll() => _clients;
 
-    /// <inheritdoc />
-    public ClientGetDto? GetById(int id) => context.Clients.Find(x => x.Id == id);
+    public Client? GetById(int id) => _clients.Find(x => x.Id == id);
 
-    /// <inheritdoc />
-    public int Post(ClientGetDto client)
+    public void Post(Client entity)
     {
-        int newId = context.Clients.Count > 0 ? context.Clients.Max(h => h.Id) + 1 : 1;
-        client.Id = newId;
-        context.Clients.Add(client);
-        return newId;
+        entity.Id = ++_clientId;
+        _clients.Add(entity);
     }
 
-    /// <inheritdoc />
-    public bool Put(ClientGetDto client)
+    public bool Put(Client entity, int id)
     {
-        var oldValue = GetById(client.Id);
-
+        var oldValue = GetById(id);
         if (oldValue == null)
             return false;
-
-        oldValue.FullName = client.FullName;
-        oldValue.PassportData = client.PassportData;
-        oldValue.BirthOfDay = client.BirthOfDay;
-
+        oldValue.FullName = entity.FullName;
+        oldValue.PassportData = entity.PassportData;
+        oldValue.BirthOfDay = entity.BirthOfDay;
         return true;
     }
 
-    /// <inheritdoc />
     public bool Delete(int id)
     {
         var client = GetById(id);
         if (client == null)
             return false;
-        _ = context.Clients.Remove(client);
+        _clients.Remove(client);
         return true;
     }
 }

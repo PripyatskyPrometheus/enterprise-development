@@ -1,45 +1,38 @@
-﻿using HotelBooking.API.Dto;
+﻿using HotelBooking.Domain.Entity;
 
 namespace HotelBooking.API.Repository;
 
-public class PassportRepository(HotelBookingDbContext context) : IRepository<PassportGetDto>
+public class PassportRepository : IRepository<Passport>
 {
-    /// <inheritdoc />
-    public IEnumerable<PassportGetDto> GetAll() => context.Passports;
+    private readonly List<Passport> _passports = [];
+    private int _passportId = 0;
 
-    /// <inheritdoc />
-    public PassportGetDto? GetById(int id) => context.Passports.Find(x => x.Id == id);
+    public IEnumerable<Passport> GetAll() => _passports;
 
-    /// <inheritdoc />
-    public int Post(PassportGetDto passport)
+    public Passport? GetById(int id) => _passports.Find(x => x.Id == id);
+
+    public void Post(Passport entity)
     {
-        int newId = context.Passports.Count > 0 ? context.Passports.Max(h => h.Id) + 1 : 1;
-        passport.Id = newId;
-        context.Passports.Add(passport);
-        return newId;
+       entity.Id = ++_passportId;
+       _passports.Add(entity);
     }
 
-    /// <inheritdoc />
-    public bool Put(PassportGetDto passport)
+    public bool Put(Passport entity, int id)
     {
-        var oldValue = GetById(passport.Id);
-
+        var oldValue = GetById(id);
         if (oldValue == null)
             return false;
-
-        oldValue.Series = passport.Series;
-        oldValue.Number = passport.Number;
-
+        oldValue.Series = entity.Series;
+        oldValue.Number = entity.Number;
         return true;
     }
 
-    /// <inheritdoc />
     public bool Delete(int id)
     {
         var passport = GetById(id);
         if (passport == null)
             return false;
-        _ = context.Passports.Remove(passport);
+        _passports.Remove(passport);
         return true;
     }
 }

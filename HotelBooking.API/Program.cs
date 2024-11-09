@@ -1,11 +1,10 @@
 using HotelBooking.API;
 using HotelBooking.API.Repository;
-using HotelBooking.API.Service;
+using HotelBooking.Domain.Entity;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
 
@@ -17,34 +16,21 @@ builder.Services.AddSwaggerGen(options =>
 });
 builder.Services.AddAutoMapper(typeof(Mapping));
 
-builder.Services.AddSingleton<HotelBookingDbContext>();
-
-builder.Services.AddSingleton<HotelRepository>();
-builder.Services.AddSingleton<RoomRepository>();
-builder.Services.AddSingleton<RoomTypeRepository>();
-builder.Services.AddSingleton<PassportRepository>();
-builder.Services.AddSingleton<ClientRepository>();
-builder.Services.AddSingleton<BookedRoomRepository>();
-
-builder.Services.AddSingleton<HotelService>();
-builder.Services.AddSingleton<RoomService>();
-builder.Services.AddSingleton<RoomTypeService>();
-builder.Services.AddSingleton<PassportService>();
-builder.Services.AddSingleton<ClientService>();
-builder.Services.AddSingleton<BookedRoomService>();
+builder.Services.AddSingleton<IRepository<Hotel>, HotelRepository>();
+builder.Services.AddSingleton<IRepository<Room>, RoomRepository>();
+builder.Services.AddSingleton<IRepository<RoomType>, RoomTypeRepository>();
+builder.Services.AddSingleton<IRepository<Passport>, PassportRepository>();
+builder.Services.AddSingleton<IRepository<Client>, ClientRepository>();
+builder.Services.AddSingleton<IRepository<BookedRoom>, BookedRoomRepository>();
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    _ = app.UseSwagger();
-    _ = app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

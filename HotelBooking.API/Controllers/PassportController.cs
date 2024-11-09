@@ -1,23 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HotelBooking.API.Dto;
-using HotelBooking.API.Service;
+using HotelBooking.API.Repository;
+using HotelBooking.Domain.Entity;
+using AutoMapper;
 
 namespace HotelBooking.API.Controllers;
 
 /// <summary>
 /// Контроллер для работы с паспортами
 /// </summary>
+[Route("api/[controller]")]
 [ApiController]
-[Route("[controller]")]
-public class PassportController(PassportService service) : ControllerBase
+public class PassportController(IRepository<Passport> repository, IMapper mapper) : ControllerBase
 {
     /// <summary>
     /// Получение информации об о всех клиентах
     /// </summary>
     [HttpGet]
-    public ActionResult<IEnumerable<PassportGetDto>> GetAll()
+    public ActionResult<IEnumerable<Passport>> GetAll()
     {
-        var passports = service.GetAll();
+        var passports = repository.GetAll();
         return Ok(passports);
     }
 
@@ -25,11 +27,11 @@ public class PassportController(PassportService service) : ControllerBase
     /// Получение информации о паспорте через id
     /// </summary>
     [HttpGet("{id}")]
-    public ActionResult<PassportGetDto> GetById(int id)
+    public ActionResult<Passport> GetById(int id)
     {
-        var passport = service.GetById(id);
+        var passport = repository.GetById(id);
         if (passport == null)
-            return NotFound($"Паспорта с id {id} нет.");
+            return NotFound("Паспорта с Таким Id нет");
         return Ok(passport);
     }
 
@@ -37,23 +39,24 @@ public class PassportController(PassportService service) : ControllerBase
     /// Добавление нового паспорта
     /// </summary>
     [HttpPost]
-    public ActionResult<object> Post([FromBody] PassportPostDto postDto)
+    public IActionResult Post([FromBody] PassportDto value)
     {
-        var newId = service.Post(postDto);
-        return Ok(new { id = newId });
+        var passport = mapper.Map<Passport>(value);
+        repository.Post(passport);
+        return Ok();
     }
 
     /// <summary>
-    /// Изменение данных о клиенте через id
+    /// Изменение данных через id
     /// </summary>
     [HttpPut("{id}")]
-    public ActionResult<PassportGetDto> Put(int id, [FromBody] PassportPostDto putDto)
+    public IActionResult Put(int id, [FromBody] PassportDto value)
     {
-        var updatedPassport = service.Put(id, putDto);
-        if (updatedPassport == null)
-            return NotFound($"Паспорта с id {id} нет.");
-
-        return Ok(updatedPassport);
+        var passport = mapper.Map<Passport>(value);
+        if (!repository.Put(passport, id))
+            return NotFound("Паспорта с Таким Id нет");
+        repository.Put(passport, id);
+        return Ok(passport);
     }
 
     /// <summary>
@@ -62,10 +65,9 @@ public class PassportController(PassportService service) : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var isDeleted = service.Delete(id);
-        if (!isDeleted)
-            return NotFound($"Паспорта с id {id} нет.");
-
-        return Ok($"Паспорт удалён");
+        if (repository.GetById(id) == null)
+            return NotFound("Паспорта с таким Id не существует");
+        repository.Delete(id);
+        return Ok();
     }
 }
