@@ -54,9 +54,9 @@ public class BookedRoomController(IRepository<BookedRoom> repository,
         bookedRoom.DateEvection = DateOnly.ParseExact(value.DateEvection, "yyyy-mm-dd");
         bookedRoom.DateArrival = DateOnly.ParseExact(value.DateArrival, "yyyy-mm-dd");
         if (bookedRoom.Client == null)
-            return NotFound("Клиент не найден по заданному id");
+            return NotFound("Клиента с таким Id не существует");
         if (bookedRoom.Room == null)
-            return NotFound("Комната по заданному id не найдена");
+            return NotFound("Номера с таким Id не существует");
         repository.Post(bookedRoom);
         return Ok();
     }
@@ -103,15 +103,15 @@ public class BookedRoomController(IRepository<BookedRoom> repository,
     {
         var hotelId = GetHotelIdByName(name);
         if (hotelId == null)
-            return NotFound("Отель с таким названием не найден");
+            return NotFound("Отеля с таким названием не существует");
         var roomsInHotel = GetRoomsInHotel([hotelId]);
         if (roomsInHotel == null)
-            return NotFound("Комнаты для данного отеля не найдены");
+            return NotFound("Номера для данного отеля не найдены");
         return Ok(ReturnAllClientInHotel(hotelId, roomsInHotel));
     }
 
     /// <summary>
-    /// Возвращает все свободные комнаты в выбранном городе
+    /// Возвращает все свободные номера в выбранном городе
     /// </summary>
     /// <param name="city"></param>
     /// <returns>Список свободных комнат</returns>
@@ -120,7 +120,7 @@ public class BookedRoomController(IRepository<BookedRoom> repository,
     {
         var hotelsInCity = GetHotelsByCity(city);
         if (hotelsInCity.Count() == 0)
-            return NotFound("Отели в выбранном городе не найдены");
+            return NotFound("Отели в этом городе не найдены");
         var roomsInCity = GetRoomsInHotel(hotelsInCity);
         return Ok(GetFreeRoomInCity(roomsInCity));
     }
@@ -149,9 +149,9 @@ public class BookedRoomController(IRepository<BookedRoom> repository,
     [NonAction]
     public IEnumerable<Room> GetFreeRoomInCity(IEnumerable<Room> rooms)
     {
-        var reservRooms = repository.GetAll().Where(r => rooms.Contains(r.Room) &&
+        var bookedRooms = repository.GetAll().Where(r => rooms.Contains(r.Room) &&
         r.DateEvection == null).Select(r => r.Room);
-        var freeRooms = rooms.Where(r => !reservRooms.Contains(r)).Select(r => r);
+        var freeRooms = rooms.Where(r => !bookedRooms.Contains(r)).Select(r => r);
         return freeRooms;
     }
 
