@@ -2,20 +2,6 @@
 
 namespace HotelBooking.API.Repository;
 
-public class T
-{
-    public T(IEnumerable<Hotel> hotel, decimal min, decimal max, decimal avg)
-    {
-        Min = min; Max = max;
-        Avg = avg;
-        Hotel = hotel;
-    }
-    public IEnumerable<Hotel> Hotel { get; set; }
-    public decimal Min { get; set; }
-    public decimal Max { get; set; }
-    public decimal Avg { get; set; }
-}
-
 public class HotelRepository : IRepository<Hotel>
 {
     private readonly List<Hotel> _hotels = [];
@@ -25,21 +11,22 @@ public class HotelRepository : IRepository<Hotel>
 
     public Hotel? GetById(int id) => _hotels.Find(x => x.Id == id);
 
-    public void Post(Hotel entity)
+    public Hotel Post(Hotel entity)
     {
         entity.Id = _hotelId++;
         _hotels.Add(entity);
+        return entity;
     }
 
-    public bool Put(Hotel entity, int id)
+    public Hotel? Put(Hotel entity, int id)
     {
         var oldValue = GetById(id);
         if (oldValue == null)
-            return false;
+            return oldValue;
         oldValue.Name = entity.Name;
         oldValue.Address = entity.Address;
         oldValue.City = entity.City;
-        return true;
+        return oldValue;
     }
 
     public bool Delete(int id)

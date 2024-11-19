@@ -19,7 +19,8 @@ public class ClientController(IRepository<Client> repository, IRepository<Passpo
     [HttpGet]
     public ActionResult<IEnumerable<ClientDto>> GetAll()
     {
-        return Ok(repository.GetAll());
+        var client = repository.GetAll();
+        return Ok(mapper.Map<IEnumerable<ClientDto>>(client));
     }
 
     /// <summary>
@@ -31,41 +32,37 @@ public class ClientController(IRepository<Client> repository, IRepository<Passpo
         var client = repository.GetById(id);
         if (client == null)
             return NotFound("Клиента с таким Id не существует");
-        return Ok(client);
+        return Ok(mapper.Map<IEnumerable<ClientDto>>(client));
     }
 
     /// <summary>
     /// Добавление нового клиента
     /// </summary>
     [HttpPost]
-    public IActionResult Post([FromBody] ClientDto value, PassportDto value1)
+    public IActionResult Post([FromBody] ClientDto clientDto)
     {
-        if (repositoryPassport.GetById(value.PassportDataId) == null)
-            return NotFound();
-        var client = mapper.Map<Client>(value);
-        if (mapper.Map<Passport>(value1) != repositoryPassport.GetById(value.PassportDataId))
-            NotFound();
-        client.PassportData = mapper.Map<Passport>(value1);
-        repository.Post(client);
-        return Ok();
+        var client = mapper.Map<Client>(clientDto);
+        var passport = repositoryPassport.GetById(clientDto.PassportDataId);
+        if (passport == null)
+            return NotFound("Паспортных данных не существует");
+        client.PassportData = passport;
+        return Ok(repository.Post(client));
     }
 
     /// <summary>
     /// Изменение данных о клиенте через id
     /// </summary>
     [HttpPut("{id}")]
-    public IActionResult Put(int id, [FromBody] ClientDto value, PassportDto value1)
+    public IActionResult Put(int id, [FromBody] ClientDto value)
     {
         if (repository.GetById(id) == null)
             return NotFound("Клиента с таким Id не существует");
-        if (repositoryPassport.GetById(value.PassportDataId) == null)
-            return NotFound();
         var client = mapper.Map<Client>(value);
-        if (mapper.Map<Passport>(value1) != repositoryPassport.GetById(value.PassportDataId))
-            NotFound();
-        client.PassportData = mapper.Map<Passport>(value1);
-        repository.Put(client, id);
-        return Ok();
+        var passport = repositoryPassport.GetById(value.PassportDataId);
+        if (passport == null)
+            return NotFound("Паспортных данных не существует");
+        client.PassportData = passport;
+        return Ok(repository.Put(client, id));
     }
 
     /// <summary>

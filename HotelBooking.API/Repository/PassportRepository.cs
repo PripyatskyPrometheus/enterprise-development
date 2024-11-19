@@ -11,20 +11,21 @@ public class PassportRepository : IRepository<Passport>
 
     public Passport? GetById(int id) => _passports.Find(x => x.Id == id);
 
-    public void Post(Passport entity)
+    public Passport Post(Passport entity)
     {
-       entity.Id = ++_passportId;
-       _passports.Add(entity);
+        entity.Id = ++_passportId;
+        _passports.Add(entity);
+        return entity;
     }
 
-    public bool Put(Passport entity, int id)
+    public Passport? Put(Passport entity, int id)
     {
         var oldValue = GetById(id);
         if (oldValue == null)
-            return false;
+            return oldValue;
         oldValue.Series = entity.Series;
         oldValue.Number = entity.Number;
-        return true;
+        return oldValue;
     }
 
     public bool Delete(int id)

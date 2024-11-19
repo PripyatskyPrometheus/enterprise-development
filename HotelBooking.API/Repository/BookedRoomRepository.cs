@@ -2,17 +2,6 @@
 
 namespace HotelBooking.API.Repository;
 
-public class M
-{
-    public M(Client client, int total)
-    {
-        Total = total;
-        Client = client;
-    }
-    public Client Client { get; set; }
-    public int Total { get; set; }
-}
-
 public class BookedRoomRepository : IRepository<BookedRoom>
 {
     private readonly List<BookedRoom> _roomsBooked = [];
@@ -21,23 +10,24 @@ public class BookedRoomRepository : IRepository<BookedRoom>
 
     public BookedRoom? GetById(int id) => _roomsBooked.Find(x => x.Id == id);
 
-    public void Post(BookedRoom entity)
+    public BookedRoom Post(BookedRoom entity)
     {
-        entity.Id = ++_roomsBookedId;
+        entity.Id = _roomsBookedId++;
         _roomsBooked.Add(entity);
+        return entity;
     }
 
-    public bool Put(BookedRoom entity, int id)
+    public BookedRoom? Put(BookedRoom entity, int id)
     {
         var oldValue = GetById(id);
         if (oldValue == null)
-            return false;
+            return oldValue;
         oldValue.Client = entity.Client;
         oldValue.Room = entity.Room;
         oldValue.DateArrival = entity.DateArrival;
         oldValue.DateEvection = entity.DateEvection;
         oldValue.PeriodInDays = entity.PeriodInDays;
-        return true;
+        return oldValue;
     }
 
     public bool Delete(int id)

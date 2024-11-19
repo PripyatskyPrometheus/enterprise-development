@@ -17,10 +17,10 @@ public class PassportController(IRepository<Passport> repository, IMapper mapper
     /// Получение информации об о всех клиентах
     /// </summary>
     [HttpGet]
-    public ActionResult<IEnumerable<Passport>> GetAll()
+    public ActionResult<IEnumerable<PassportDto>> GetAll()
     {
         var passports = repository.GetAll();
-        return Ok(passports);
+        return Ok(mapper.Map<IEnumerable<PassportDto>>(passports));
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ public class PassportController(IRepository<Passport> repository, IMapper mapper
         var passport = repository.GetById(id);
         if (passport == null)
             return NotFound("Паспорта с Таким Id нет");
-        return Ok(passport);
+        return Ok(mapper.Map<IEnumerable<PassportDto>>(passport));
     }
 
     /// <summary>
@@ -42,8 +42,7 @@ public class PassportController(IRepository<Passport> repository, IMapper mapper
     public IActionResult Post([FromBody] PassportDto value)
     {
         var passport = mapper.Map<Passport>(value);
-        repository.Post(passport);
-        return Ok();
+        return Ok(repository.Post(passport));
     }
 
     /// <summary>
@@ -53,10 +52,9 @@ public class PassportController(IRepository<Passport> repository, IMapper mapper
     public IActionResult Put(int id, [FromBody] PassportDto value)
     {
         var passport = mapper.Map<Passport>(value);
-        if (!repository.Put(passport, id))
-            return NotFound("Паспорта с Таким Id нет");
-        repository.Put(passport, id);
-        return Ok(passport);
+        if (repository.GetById(id) == null)
+            return NotFound("Паспорта с Таким Id не существует");
+        return Ok(repository.Put(passport, id));
     }
 
     /// <summary>
