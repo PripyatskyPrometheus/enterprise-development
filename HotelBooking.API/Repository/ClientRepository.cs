@@ -10,21 +10,22 @@ public class ClientRepository : IRepository<Client>
 
     public Client? GetById(int id) => _clients.Find(x => x.Id == id);
 
-    public void Post(Client entity)
+    public Client Post(Client entity)
     {
-        entity.Id = ++_clientId;
+        entity.Id = _clientId++;
         _clients.Add(entity);
+        return entity;
     }
 
-    public bool Put(Client entity, int id)
+    public Client? Put(Client entity, int id)
     {
         var oldValue = GetById(id);
         if (oldValue == null)
-            return false;
+            return null;
         oldValue.FullName = entity.FullName;
         oldValue.PassportData = entity.PassportData;
         oldValue.BirthOfDay = entity.BirthOfDay;
-        return true;
+        return oldValue;
     }
 
     public bool Delete(int id)

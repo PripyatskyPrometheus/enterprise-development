@@ -10,23 +10,23 @@ public class RoomRepository : IRepository<Room>
 
     public Room? GetById(int id) => _rooms.Find(x => x.Id == id);
 
-    public void Post(Room entity)
+    public Room Post(Room entity)
     {
         entity.Id = ++_roomId;
         _rooms.Add(entity);
+        return entity;
     }
 
-    public bool Put(Room room, int id)
+    public Room? Put(Room room, int id)
     {
         var oldValue = GetById(id);
-
         if (oldValue == null)
-            return false;
+            return oldValue;
         oldValue.Type = room.Type;
         oldValue.Capacity = room.Capacity;
         oldValue.Cost = room.Cost;
         oldValue.HotelId = room.HotelId;
-        return true;
+        return oldValue;
     }
 
     public bool Delete(int id)

@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using HotelBooking.Domain.Entity;
 using HotelBooking.API.Repository;
 using AutoMapper;
-
+using HotelBooking.API.Services;
+using HotelBooking.API.Application;
 
 namespace HotelBooking.API.Controllers;
 
@@ -12,18 +13,18 @@ namespace HotelBooking.API.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class HotelController(IRepository<Hotel> repository, IRepository<BookedRoom> repositoryBookedRoom,
-    IRepository<Room> repositoryRoom, IMapper mapper) : ControllerBase
+public class HotelController(IRepository<Hotel> repository, IRepository<Room> repositoryRoom, 
+    IHotelService service, IMapper mapper) : ControllerBase
 {
     /// <summary>
     /// Получить все отели
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public ActionResult<IEnumerable<Hotel>> GetAll()
+    public ActionResult<IEnumerable<HotelDto>> GetAll()
     {
         var hotels = repository.GetAll();
-        return Ok(hotels);
+        return Ok(mapper.Map<IEnumerable<HotelDto>>(hotels));
     }
 
     /// <summary>
@@ -32,12 +33,12 @@ public class HotelController(IRepository<Hotel> repository, IRepository<BookedRo
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public ActionResult<Hotel> GetById(int id)
+    public ActionResult<HotelDto> GetById(int id)
     {
         var hotel = repository.GetById(id);
         if (hotel == null)
             return NotFound("Отеля с таким Id не существует");
-        return Ok(hotel);
+        return Ok(mapper.Map<IEnumerable<HotelDto>>(hotel));
     }
 
     /// <summary>
@@ -48,8 +49,7 @@ public class HotelController(IRepository<Hotel> repository, IRepository<BookedRo
     public IActionResult Post([FromBody] HotelDto value)
     {
         var hotel = mapper.Map<Hotel>(value);
-        repository.Post(hotel);
-        return Ok();
+        return Ok(repository.Post(hotel));
     }
 
     /// <summary>
@@ -63,8 +63,7 @@ public class HotelController(IRepository<Hotel> repository, IRepository<BookedRo
         if (repository.GetById(id) == null) 
             return NotFound("Отеля с таким Id не существует"); 
         var hotel = mapper.Map<Hotel>(value);
-        repository.Put(hotel, id);
-        return Ok();
+        return Ok(repository.Put(hotel, id));
     }
 
     /// <summary>
@@ -87,7 +86,7 @@ public class HotelController(IRepository<Hotel> repository, IRepository<BookedRo
     [HttpGet("top_5_hotels_by_number_of_bookings")]
     public ActionResult<IEnumerable<Hotel>> GetTopFiveHotels()
     {
-        return Ok(GetTopFiveHotelById(GetTopFiveHotelId()));
+        return Ok(service.GetTopFiveHotelById(service.GetTopFiveHotelId()));
     }
 
     /// <summary>
@@ -95,34 +94,8 @@ public class HotelController(IRepository<Hotel> repository, IRepository<BookedRo
     /// </summary>
     /// <returns>структура {отель, минимальная цена комнаты, максимальная цена, средняя цена}</returns>
     [HttpGet("cost_info_about_hotels")]
-    public ActionResult<IEnumerable<T>> GetTop()
+    public ActionResult<IEnumerable<DataHotelMinMaxAvgCost>> GetTop()
     {
-        return Ok(GetMaxAvgMinForHotels(repositoryRoom.GetAll()));
+        return Ok(service.GetMaxAvgMinForHotels(repositoryRoom.GetAll()));
     }
-
-    [NonAction]
-    public int GetCountHotels() => repository.GetAll().Count();
-
-    [NonAction]
-    public IEnumerable<Hotel> GetTopFiveHotelById(IEnumerable<int> id)
-    {
-        return repository.GetAll().Where(h => id.Contains(h.Id));
-    }
-
-    [NonAction]
-    public IEnumerable<T> GetMaxAvgMinForHotels(IEnumerable<Room> rooms)
-    {
-        var hotelCosts = repository.GetAll().Select(h => new T
-        (
-            (repository.GetAll().Where(hotel => hotel.Id == h.Id).Select(hotel => hotel)),
-            rooms.Where(r => r.HotelId == h.Id).Select(r => r).ToList().Min(rm => rm.Cost),
-            rooms.Where(r => r.HotelId == h.Id).Select(r => r).ToList().Max(rm => rm.Cost),
-            rooms.Where(r => r.HotelId == h.Id).Select(r => r).ToList().Average(rm => rm.Cost)
-        )).AsEnumerable();
-
-        return hotelCosts;
-    }
-
-    [NonAction]
-    public IEnumerable<int> GetTopFiveHotelId() => repositoryBookedRoom.GetAll().GroupBy(r => r.Room.HotelId).Select(r => r.Key).Take(5);
 }

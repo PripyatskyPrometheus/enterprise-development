@@ -7,11 +7,14 @@ public class Mapping : Profile
 {
     public Mapping()
     {
-        _ = CreateMap<Hotel, HotelDto>().ReverseMap();
-        _ = CreateMap<Passport, PassportDto>().ReverseMap();
-        _ = CreateMap<Client, ClientDto>().ReverseMap();
-        _ = CreateMap<RoomType, RoomTypeDto>().ReverseMap();
-        _ = CreateMap<Room, RoomDto>().ReverseMap();
-        _ = CreateMap<BookedRoom, BookedRoomDto>().ReverseMap();
+        CreateMap<Hotel, HotelDto>().ReverseMap();
+        CreateMap<Passport, PassportDto>().ReverseMap();
+        CreateMap<Client, ClientDto>().ReverseMap()
+            .ForMember("Birthday", opt => opt.MapFrom(c => DateOnly.ParseExact(c.BirthOfDay, "yyyy-mm-dd"))); ;
+        CreateMap<RoomType, RoomTypeDto>().ReverseMap();
+        CreateMap<Room, RoomDto>().ReverseMap();
+        CreateMap<BookedRoom, BookedRoomDto>().ReverseMap()
+            .ForMember("DateArrival", opt => opt.MapFrom(r => DateOnly.ParseExact(r.DateArrival, "yyyy-mm-dd")))
+            .ForMember("DateEvection", opt => opt.MapFrom(r => DateOnly.ParseExact(r.DateEvection, "yyyy-mm-dd")));
     }
 }

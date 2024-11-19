@@ -39,32 +39,27 @@ public class RoomController(IRepository<Room> repository, IRepository<RoomType> 
     /// Добавление нового номера
     /// </summary>
     [HttpPost]
-    public ActionResult Post([FromBody] RoomDto value, RoomTypeDto value1)
-    {
-        if (repositoryRoomType.GetById(value.TypeId) == null)
+    public ActionResult Post([FromBody] RoomDto roomDto)
+    {   
+        var room = mapper.Map<Room>(roomDto);
+        var roomType = repositoryRoomType.GetById(roomDto.TypeId);
+        if (roomType == null)
             NotFound("Типа с таким Id не существует");
-        var room = mapper.Map<Room>(value);
-        if (repositoryRoomType.GetById(value.TypeId) != mapper.Map<RoomType>(value1))
-            NotFound();
-        room.Type = mapper.Map<RoomType>(value1);
-        repository.Post(room);
-        return Ok(room);
+        return Ok(repository.Post(room));
     }
 
     /// <summary>
     /// Изменение данных о номере через id
     /// </summary>
     [HttpPut("{id}")]
-    public ActionResult Put(int id, [FromBody] RoomDto value, RoomTypeDto value1)
+    public ActionResult Put(int id, [FromBody] RoomDto roomDto)
     {
         if (repository.GetById(id) == null)
             NotFound("Номера с таким Id не существует");
-        if (repositoryRoomType.GetById(value.TypeId) == null)
+        var room = mapper.Map<Room>(roomDto);
+        var roomType = repositoryRoomType.GetById(roomDto.TypeId);
+        if (roomType == null)
             NotFound("Типа с таким Id не существует");
-        var room = mapper.Map<Room>(value);
-        if (repositoryRoomType.GetById(value.TypeId) != mapper.Map<RoomType>(value1))
-            NotFound();
-        room.Type = mapper.Map<RoomType>(value1);
         repository.Put(room, id);
         return Ok(room);
     }

@@ -11,19 +11,20 @@ public class RoomTypeRepository : IRepository<RoomType>
 
     public RoomType? GetById(int id) => _roomType.Find(x => x.Id == id);
 
-    public void Post(RoomType entity)
+    public RoomType Post(RoomType entity)
     {
         entity.Id = ++_roomTypeId;
-        _roomType.Add(entity);
+         _roomType.Add(entity);
+        return entity;
     }
 
-    public bool Put(RoomType entity, int id)
+    public RoomType? Put(RoomType entity, int id)
     {
         var oldValue = GetById(id);
         if (oldValue == null)
-            return false;
+            return oldValue;
         oldValue.TypeName = entity.TypeName;
-        return true;
+        return oldValue;
     }
 
     public bool Delete(int id)

@@ -20,43 +20,41 @@ public class RoomTypeController(IRepository<RoomType> repository, IMapper mapper
     public ActionResult<IEnumerable<RoomType>> GetAll()
     {
         var roomType = repository.GetAll();
-        return Ok(roomType);
+        return Ok(mapper.Map<IEnumerable<RoomTypeDto>>(roomType));
     }
 
     /// <summary>
     /// Получение информации о номере через id
     /// </summary>
     [HttpGet("{id}")]
-    public ActionResult<RoomType> GetById(int id)
+    public ActionResult<RoomTypeDto> GetById(int id)
     {
         var roomType = repository.GetById(id);
         if (roomType == null)
             return NotFound("Типа с таким Id не существует");
-        return Ok(roomType);
+        return Ok(mapper.Map<IEnumerable<RoomTypeDto>>(roomType));
     }
 
     /// <summary>
     /// Добавление нового номера
     /// </summary>
     [HttpPost]
-    public ActionResult<object> Post([FromBody] RoomTypeDto value)
+    public ActionResult Post([FromBody] RoomTypeDto roomTypeDto)
     {
-        var roomType = mapper.Map<RoomType>(value);
-        repository.Post(roomType);
-        return Ok();
+        var roomType = mapper.Map<RoomType>(roomTypeDto);
+        return Ok(repository.Post(roomType));
     }
 
     /// <summary>
     /// Изменение данных о номере через id
     /// </summary>
     [HttpPut("{id}")]
-    public ActionResult Put(int id, [FromBody] RoomTypeDto value)
+    public ActionResult Put(int id, [FromBody] RoomTypeDto roomTypeDto)
     {
         if (repository.GetById(id) == null) 
             return NotFound("Типа с таким Id не существует");
-        var roomType = mapper.Map<RoomType>(value);
-        repository.Put(roomType, id);
-        return Ok();
+        var roomType = mapper.Map<RoomType>(roomTypeDto);
+        return Ok(repository.Put(roomType, id));
     }
 
     /// <summary>
