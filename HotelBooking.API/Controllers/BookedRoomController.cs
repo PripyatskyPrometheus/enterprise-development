@@ -56,8 +56,6 @@ public class BookedRoomController(IRepository<BookedRoom> repository,
         if (room == null)
             return NotFound("Номера с таким Id не существует");
         bookedRoom.Room = room;
-        bookedRoom.DateEvection = DateOnly.ParseExact(bookedRoomDto.DateEvection, "yyyy-mm-dd");
-        bookedRoom.DateArrival = DateOnly.ParseExact(bookedRoomDto.DateArrival, "yyyy-mm-dd");
         return Ok(repository.Post(bookedRoom));
     }
 
