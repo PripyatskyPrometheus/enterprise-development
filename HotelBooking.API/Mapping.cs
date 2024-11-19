@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using HotelBooking.API.Dto;
 using HotelBooking.Domain.Entity;
-using System.Globalization;
 namespace HotelBooking.API;
 
 public class Mapping : Profile
@@ -22,6 +21,7 @@ public class Mapping : Profile
         CreateMap<Client, ClientDto>()
             .ForMember("BirthOfDay", opt => opt.MapFrom(c => c.BirthOfDay.ToString("yyyy-mm-dd")));
         CreateMap<Client, ClientDto>().ReverseMap()
-            .ForMember("BirthOfDay", opt => opt.MapFrom(с => DateOnly.ParseExact(с.BirthOfDay, "yyyy-mm-dd")));
+            .ForMember("BirthOfDay", opt => opt.MapFrom(с => DateOnly.ParseExact(с.BirthOfDay, "yyyy-mm-dd"))); //Здесь я выбрал использование ReverseMap(),
+                                                                                                                //потому что иначе, он никак не хочет 
     }
 }
