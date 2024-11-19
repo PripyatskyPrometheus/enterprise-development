@@ -31,7 +31,7 @@ public class PassportController(IRepository<Passport> repository, IMapper mapper
     {
         var passport = repository.GetById(id);
         if (passport == null)
-            return NotFound("Паспорта с Таким Id нет");
+            return NotFound("Паспорт с таким Id не существует");
         return Ok(mapper.Map<IEnumerable<PassportDto>>(passport));
     }
 
