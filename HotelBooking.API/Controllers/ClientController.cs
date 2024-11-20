@@ -17,10 +17,10 @@ public class ClientController(IRepository<Client> repository, IRepository<Passpo
     /// Получение информации об о всех клиентах
     /// </summary>
     [HttpGet]
-    public ActionResult<IEnumerable<ClientDto>> GetAll()
+    public ActionResult<IEnumerable<ClientGetDto>> GetAll()
     {
         var client = repository.GetAll();
-        return Ok(mapper.Map<IEnumerable<ClientDto>>(client));
+        return Ok(mapper.Map<IEnumerable<ClientGetDto>>(client));
     }
 
     /// <summary>

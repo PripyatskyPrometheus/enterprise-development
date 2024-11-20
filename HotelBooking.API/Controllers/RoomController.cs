@@ -44,7 +44,8 @@ public class RoomController(IRepository<Room> repository, IRepository<RoomType> 
         var room = mapper.Map<Room>(roomDto);
         var roomType = repositoryRoomType.GetById(roomDto.TypeId);
         if (roomType == null)
-            NotFound("Типа с таким Id не существует");
+            return NotFound("Типа с таким Id не существует");
+        room.Type = roomType;
         return Ok(repository.Post(room));
     }
 
@@ -59,7 +60,8 @@ public class RoomController(IRepository<Room> repository, IRepository<RoomType> 
         var room = mapper.Map<Room>(roomDto);
         var roomType = repositoryRoomType.GetById(roomDto.TypeId);
         if (roomType == null)
-            NotFound("Типа с таким Id не существует");
+            return NotFound("Типа с таким Id не существует");
+        room.Type = roomType;
         repository.Put(room, id);
         return Ok(room);
     }

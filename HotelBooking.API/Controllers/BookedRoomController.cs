@@ -33,7 +33,7 @@ public class BookedRoomController(IRepository<BookedRoom> repository,
     /// Получение информации по id о комнате
     /// </summary>
     [HttpGet("{id}")]
-    public ActionResult<BookedRoomDto> GetById(int id)
+    public ActionResult<BookedRoomGetDto> GetById(int id)
     {
         var bookedRoom = repository.GetById(id);
         if (bookedRoom == null)

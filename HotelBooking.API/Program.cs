@@ -7,7 +7,6 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -25,6 +24,8 @@ builder.Services.AddSingleton<IRepository<RoomType>, RoomTypeRepository>();
 builder.Services.AddSingleton<IRepository<Passport>, PassportRepository>();
 builder.Services.AddSingleton<IRepository<Client>, ClientRepository>();
 builder.Services.AddSingleton<IRepository<BookedRoom>, BookedRoomRepository>();
+
+builder.Services.AddControllers();
 
 builder.Services.AddAutoMapper(typeof(Mapping));
 
