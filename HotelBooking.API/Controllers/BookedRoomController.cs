@@ -23,10 +23,10 @@ public class BookedRoomController(IRepository<BookedRoom> repository,
     /// Получение информации о всех забронированных номерах.
     /// </summary>
     [HttpGet]
-    public ActionResult<IEnumerable<BookedRoomDto>> GetAll()
+    public ActionResult<IEnumerable<BookedRoomGetDto>> GetAll()
     {
         var bookedRoom = repository.GetAll();
-        return Ok(mapper.Map<IEnumerable<BookedRoomDto>>(bookedRoom));
+        return Ok(mapper.Map<IEnumerable<BookedRoomGetDto>>(bookedRoom));
     }
 
     /// <summary>
@@ -38,7 +38,7 @@ public class BookedRoomController(IRepository<BookedRoom> repository,
         var bookedRoom = repository.GetById(id);
         if (bookedRoom == null)
             return NotFound("Брони с таким Id не существует");
-        return Ok(mapper.Map<IEnumerable<BookedRoomDto>>(bookedRoom));
+        return Ok(mapper.Map<BookedRoomGetDto>(bookedRoom));
     }
 
     /// <summary>

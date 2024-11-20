@@ -17,22 +17,22 @@ public class PassportController(IRepository<Passport> repository, IMapper mapper
     /// Получение информации об о всех клиентах
     /// </summary>
     [HttpGet]
-    public ActionResult<IEnumerable<PassportDto>> GetAll()
+    public ActionResult<IEnumerable<PassportGetDto>> GetAll()
     {
         var passports = repository.GetAll();
-        return Ok(mapper.Map<IEnumerable<PassportDto>>(passports));
+        return Ok(mapper.Map<IEnumerable<PassportGetDto>>(passports));
     }
 
     /// <summary>
     /// Получение информации о паспорте через id
     /// </summary>
     [HttpGet("{id}")]
-    public ActionResult<Passport> GetById(int id)
+    public ActionResult<PassportGetDto> GetById(int id)
     {
         var passport = repository.GetById(id);
         if (passport == null)
             return NotFound("Паспорт с таким Id не существует");
-        return Ok(mapper.Map<IEnumerable<PassportDto>>(passport));
+        return Ok(mapper.Map<PassportGetDto>(passport));
     }
 
     /// <summary>

@@ -22,10 +22,10 @@ public class HotelController(IRepository<Hotel> repository, IRepository<Room> re
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public ActionResult<IEnumerable<HotelDto>> GetAll()
+    public ActionResult<IEnumerable<HotelGetDto>> GetAll()
     {
         var hotels = repository.GetAll();
-        return Ok(mapper.Map<IEnumerable<HotelDto>>(hotels));
+        return Ok(mapper.Map<IEnumerable<HotelGetDto>>(hotels));
     }
 
     /// <summary>
@@ -34,12 +34,12 @@ public class HotelController(IRepository<Hotel> repository, IRepository<Room> re
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public ActionResult<HotelDto> GetById(int id)
+    public ActionResult<HotelGetDto> GetById(int id)
     {
         var hotel = repository.GetById(id);
         if (hotel == null)
             return NotFound("Отеля с таким Id не существует");
-        return Ok(mapper.Map<IEnumerable<HotelDto>>(hotel));
+        return Ok(mapper.Map<HotelGetDto>(hotel));
     }
 
     /// <summary>

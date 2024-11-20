@@ -27,12 +27,12 @@ public class ClientController(IRepository<Client> repository, IRepository<Passpo
     /// Получение информации о клиентах через id
     /// </summary>
     [HttpGet("{id}")]
-    public ActionResult<ClientDto> GetById(int id)
+    public ActionResult<ClientGetDto> GetById(int id)
     {
         var client = repository.GetById(id);
         if (client == null)
             return NotFound("Клиента с таким Id не существует");
-        return Ok(mapper.Map<IEnumerable<ClientDto>>(client));
+        return Ok(mapper.Map<ClientGetDto>(client));
     }
 
     /// <summary>

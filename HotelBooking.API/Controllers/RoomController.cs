@@ -17,22 +17,22 @@ public class RoomController(IRepository<Room> repository, IRepository<RoomType> 
     /// Получение информации об о всех номерах
     /// </summary>
     [HttpGet]
-    public ActionResult<IEnumerable<RoomDto>> GetAll()
+    public ActionResult<IEnumerable<RoomGetDto>> GetAll()
     {
         var room = repository.GetAll();
-        return Ok(mapper.Map<IEnumerable<RoomDto>>(room));
+        return Ok(mapper.Map<IEnumerable<RoomGetDto>>(room));
     }
 
     /// <summary>
     /// Получение информации о номере через id
     /// </summary>
     [HttpGet("{id}")]
-    public ActionResult<RoomDto> GetById(int id)
+    public ActionResult<RoomGetDto> GetById(int id)
     {
         var room = repository.GetById(id);
         if (room == null)
             return NotFound("Номера с таким Id не существует");
-        return Ok(mapper.Map<IEnumerable<RoomDto>>(room));
+        return Ok(mapper.Map<IEnumerable<RoomGetDto>>(room));
     }
 
     /// <summary>
