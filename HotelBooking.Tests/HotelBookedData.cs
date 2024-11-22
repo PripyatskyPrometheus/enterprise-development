@@ -49,6 +49,7 @@ public class HotelBookedData
                 Id = 1,
                 FullName = "Иванов Иван Иванович",
                 PassportData = Passports[0],
+                PassportId = Passports[0].Id,
                 BirthOfDay =  new DateOnly(2003, 1, 1)
             },
             new Client
@@ -56,6 +57,7 @@ public class HotelBookedData
                 Id = 2,
                 FullName = "Петров Петр Петрович",
                 PassportData = Passports[1],
+                PassportId = Passports[1].Id,
                 BirthOfDay =  new DateOnly(2002, 5, 15)
             },
             new Client
@@ -63,6 +65,7 @@ public class HotelBookedData
                 Id = 3,
                 FullName = "Сидоров Сидор Сидорович",
                 PassportData = Passports[2],
+                PassportId = Passports[2].Id,
                 BirthOfDay =  new DateOnly(2001, 9, 20)
             },
             new Client
@@ -70,6 +73,7 @@ public class HotelBookedData
                 Id = 4,
                 FullName = "Кузнецов Алексей Владимирович",
                 PassportData = Passports[3],
+                PassportId = Passports[3].Id,
                 BirthOfDay =  new DateOnly(2004, 3, 10)
             },
             new Client
@@ -77,6 +81,7 @@ public class HotelBookedData
                 Id = 5,
                 FullName = "Смирнов Дмитрий Александрович",
                 PassportData = Passports[4],
+                PassportId = Passports[4].Id,
                 BirthOfDay =  new DateOnly(2000, 8, 27)
             },
             new Client
@@ -84,6 +89,7 @@ public class HotelBookedData
                 Id = 6,
                 FullName = "Козлов Игорь Сергеевич",
                 PassportData = Passports[5],
+                PassportId = Passports[5].Id,
                 BirthOfDay =  new DateOnly(2005, 2, 18)
             },
             new Client
@@ -91,6 +97,7 @@ public class HotelBookedData
                 Id = 7,
                 FullName = "Лебедев Владислав Денисович",
                 PassportData = Passports[6],
+                PassportId = Passports[6].Id,
                 BirthOfDay =  new DateOnly(2003, 10, 05)
             },
             new Client
@@ -98,6 +105,7 @@ public class HotelBookedData
                 Id = 8,
                 FullName = "Никитин Андрей Алексеевич",
                 PassportData = Passports[7],
+                PassportId = Passports[7].Id,
                 BirthOfDay =  new DateOnly(2001, 12, 30)
             },
             new Client
@@ -105,6 +113,7 @@ public class HotelBookedData
                 Id = 9,
                 FullName = "Морозов Кирилл Васильевич",
                 PassportData = Passports[8],
+                PassportId = Passports[8].Id,
                 BirthOfDay =  new DateOnly(2000, 4, 09)
             },
             new Client
@@ -112,6 +121,7 @@ public class HotelBookedData
                 Id = 10,
                 FullName = "Андреев Евгений Дмитриевич",
                 PassportData = Passports[9],
+                PassportId = Passports[9].Id,
                BirthOfDay =  new DateOnly(2002, 7, 14)
             },
             new Client
@@ -119,6 +129,7 @@ public class HotelBookedData
                 Id = 11,
                 FullName = "Богданова Елена Игоревна",
                 PassportData = Passports[10],
+                PassportId = Passports[10].Id,
                 BirthOfDay =  new DateOnly(2004, 11, 21)
             },
             new Client
@@ -126,6 +137,7 @@ public class HotelBookedData
                 Id = 12,
                 FullName = "Семенов Максим Павлович",
                 PassportData = Passports[11],
+                PassportId = Passports[11].Id,
                 BirthOfDay =  new DateOnly(2003, 6, 2)
             },
             new Client
@@ -133,6 +145,7 @@ public class HotelBookedData
                 Id = 13,
                 FullName = "Козлова Виктория Алексеевна",
                 PassportData = Passports[12],
+                PassportId = Passports[12].Id,
                 BirthOfDay =  new DateOnly(2000, 12, 15)
             },
             new Client
@@ -140,6 +153,7 @@ public class HotelBookedData
                 Id = 14,
                 FullName = "Новикова Анастасия Сергеевна",
                 PassportData = Passports[13],
+                PassportId = Passports[13].Id,
                 BirthOfDay =  new DateOnly(2001, 3, 25)
             },
             new Client
@@ -147,6 +161,7 @@ public class HotelBookedData
                 Id = 15,
                 FullName = "Гаврилова Ольга Владимировна",
                 PassportData = Passports[14],
+                PassportId = Passports[14].Id,
                 BirthOfDay =  new DateOnly(2002, 9, 12)
             },
             new Client
@@ -154,6 +169,7 @@ public class HotelBookedData
                 Id = 16,
                 FullName = "Белякова Светлана Ивановна",
                 PassportData = Passports[15],
+                PassportId = Passports[15].Id,
                 BirthOfDay =  new DateOnly(2004, 7, 3)
             },
             new Client
@@ -161,6 +177,7 @@ public class HotelBookedData
                 Id = 17,
                 FullName = "Федорова Екатерина Дмитриевна",
                 PassportData = Passports[16],
+                PassportId = Passports[16].Id,
                 BirthOfDay =  new DateOnly(2003, 4, 28)
             },
             new Client
@@ -168,6 +185,7 @@ public class HotelBookedData
                 Id = 18,
                 FullName = "Алексеева Ирина Александровна",
                 PassportData = Passports[17],
+                PassportId = Passports[17].Id,
                 BirthOfDay =  new DateOnly(2001, 10, 17)
             },
             new Client
@@ -175,6 +193,7 @@ public class HotelBookedData
                 Id = 19,
                 FullName = "Тихонова Татьяна Васильевна",
                 PassportData = Passports[18],
+                PassportId = Passports[18].Id,
                 BirthOfDay =  new DateOnly(2001, 10, 17)
             },
             new Client
@@ -182,33 +201,9 @@ public class HotelBookedData
                 Id = 20,
                 FullName = "Жмурова Мелания Максимова",
                 PassportData = Passports[19],
+                PassportId = Passports[19].Id,
                 BirthOfDay =  new DateOnly(2002, 02, 17)
             }
-        ];
-
-        Rooms =
-        [
-            new Room { Id = 1, Capacity = 2, Cost = 3000m, Type = TypesRoom[0], HotelId = 0 },
-            new Room { Id = 2, Capacity = 1, Cost = 4000m, Type = TypesRoom[1], HotelId = 0 },
-            new Room { Id = 3, Capacity = 3, Cost = 5000m, Type = TypesRoom[2], HotelId = 0 },
-            new Room { Id = 4, Capacity = 2, Cost = 6000m, Type = TypesRoom[0], HotelId = 0 },
-            new Room { Id = 5, Capacity = 1, Cost = 7000m, Type = TypesRoom[1], HotelId = 1 },
-            new Room { Id = 6, Capacity = 5, Cost = 8000m, Type = TypesRoom[2], HotelId = 1 },
-            new Room { Id = 7, Capacity = 3, Cost = 9000m, Type = TypesRoom[0], HotelId = 1 },
-            new Room { Id = 8, Capacity = 2, Cost = 10000m, Type = TypesRoom[1], HotelId = 1 },
-            new Room { Id = 9, Capacity = 1, Cost = 11000m, Type = TypesRoom[2], HotelId = 2 },
-            new Room { Id = 10, Capacity = 4, Cost = 12000m, Type = TypesRoom[0], HotelId = 2 },
-            new Room { Id = 11, Capacity = 2, Cost = 13000m, Type = TypesRoom[1], HotelId = 2 },
-            new Room { Id = 12, Capacity = 1, Cost = 14000m, Type = TypesRoom[2], HotelId = 2 },
-            new Room { Id = 13, Capacity = 3, Cost = 15000m, Type = TypesRoom[0], HotelId = 3 },
-            new Room { Id = 14, Capacity = 2, Cost = 16000m, Type = TypesRoom[1], HotelId = 3 },
-            new Room { Id = 15, Capacity = 5, Cost = 17000m, Type = TypesRoom[2], HotelId = 3 },
-            new Room { Id = 16, Capacity = 1, Cost = 18000m, Type = TypesRoom[0], HotelId = 3 },
-            new Room { Id = 17, Capacity = 4, Cost = 19000m, Type = TypesRoom[1], HotelId = 4 },
-            new Room { Id = 18, Capacity = 3, Cost = 20000m, Type = TypesRoom[2], HotelId = 4 },
-            new Room { Id = 19, Capacity = 2, Cost = 21000m, Type = TypesRoom[0], HotelId = 4 },
-            new Room { Id = 20, Capacity = 1, Cost = 22000m, Type = TypesRoom[1], HotelId = 4 },
-            new Room { Id = 21, Capacity = 5, Cost = 23000m, Type = TypesRoom[2], HotelId = 5 },
         ];
 
         Hotels =
@@ -221,23 +216,48 @@ public class HotelBookedData
             new  Hotel { Id = 5, Name = "Ritz-Carlton", Address = "Michigan Avenue 160", City = "Chicago" },
         ];
 
+        Rooms =
+        [
+            new Room { Id = 1, Capacity = 2, Cost = 3000m, Type = TypesRoom[0], TypeId = TypesRoom[0].Id, Hotel = Hotels[0], HotelId = 0 },
+            new Room { Id = 2, Capacity = 1, Cost = 4000m, Type = TypesRoom[1], TypeId = TypesRoom[1].Id, Hotel = Hotels[0], HotelId = 0 },
+            new Room { Id = 3, Capacity = 3, Cost = 5000m, Type = TypesRoom[2], TypeId = TypesRoom[2].Id, Hotel = Hotels[0], HotelId = 0 },
+            new Room { Id = 4, Capacity = 2, Cost = 6000m, Type = TypesRoom[0], TypeId = TypesRoom[0].Id, Hotel = Hotels[0], HotelId = 0 },
+            new Room { Id = 5, Capacity = 1, Cost = 7000m, Type = TypesRoom[1], TypeId = TypesRoom[1].Id, Hotel = Hotels[1], HotelId = 1 },
+            new Room { Id = 6, Capacity = 5, Cost = 8000m, Type = TypesRoom[2], TypeId = TypesRoom[2].Id, Hotel = Hotels[1], HotelId = 1 },
+            new Room { Id = 7, Capacity = 3, Cost = 9000m, Type = TypesRoom[0], TypeId = TypesRoom[0].Id, Hotel = Hotels[1], HotelId = 1 },
+            new Room { Id = 8, Capacity = 2, Cost = 10000m, Type = TypesRoom[1], TypeId = TypesRoom[1].Id, Hotel = Hotels[1], HotelId = 1 },
+            new Room { Id = 9, Capacity = 1, Cost = 11000m, Type = TypesRoom[2], TypeId = TypesRoom[2].Id, Hotel = Hotels[2], HotelId = 2 },
+            new Room { Id = 10, Capacity = 4, Cost = 12000m, Type = TypesRoom[0], TypeId = TypesRoom[0].Id, Hotel = Hotels[2], HotelId = 2 },
+            new Room { Id = 11, Capacity = 2, Cost = 13000m, Type = TypesRoom[1], TypeId = TypesRoom[1].Id, Hotel = Hotels[2], HotelId = 2 },
+            new Room { Id = 12, Capacity = 1, Cost = 14000m, Type = TypesRoom[2], TypeId = TypesRoom[2].Id, Hotel = Hotels[2], HotelId = 2 },
+            new Room { Id = 13, Capacity = 3, Cost = 15000m, Type = TypesRoom[0], TypeId = TypesRoom[0].Id, Hotel = Hotels[3], HotelId = 3 },
+            new Room { Id = 14, Capacity = 2, Cost = 16000m, Type = TypesRoom[1], TypeId = TypesRoom[1].Id, Hotel = Hotels[3], HotelId = 3 },
+            new Room { Id = 15, Capacity = 5, Cost = 17000m, Type = TypesRoom[2], TypeId = TypesRoom[2].Id, Hotel = Hotels[3], HotelId = 3 },
+            new Room { Id = 16, Capacity = 1, Cost = 18000m, Type = TypesRoom[0], TypeId = TypesRoom[0].Id, Hotel = Hotels[3], HotelId = 3 },
+            new Room { Id = 17, Capacity = 4, Cost = 19000m, Type = TypesRoom[1], TypeId = TypesRoom[1].Id, Hotel = Hotels[4], HotelId = 4 },
+            new Room { Id = 18, Capacity = 3, Cost = 20000m, Type = TypesRoom[2], TypeId = TypesRoom[2].Id, Hotel = Hotels[4], HotelId = 4 },
+            new Room { Id = 19, Capacity = 2, Cost = 21000m, Type = TypesRoom[0], TypeId = TypesRoom[0].Id, Hotel = Hotels[4], HotelId = 4 },
+            new Room { Id = 20, Capacity = 1, Cost = 22000m, Type = TypesRoom[1], TypeId = TypesRoom[1].Id, Hotel = Hotels[4], HotelId = 4 },
+            new Room { Id = 21, Capacity = 5, Cost = 23000m, Type = TypesRoom[2], TypeId = TypesRoom[2].Id, Hotel = Hotels[5], HotelId = 5 },
+        ];
+
         BookedRooms =
         [
-            new BookedRoom { Id = 0, Client = Clients[0], DateArrival = new DateOnly(2024, 4, 28), PeriodInDays = 10, Room = Rooms[0], DateEvection =  new DateOnly(2024, 5, 8) },
-            new BookedRoom { Id = 1, Client = Clients[11], DateArrival = new DateOnly(2024, 4, 28), PeriodInDays = 10, Room = Rooms[11], DateEvection =  new DateOnly(2024, 05, 8) },
-            new BookedRoom { Id = 2, Client = Clients[1], DateArrival = new DateOnly(2024, 5, 5), PeriodInDays = 5, Room = Rooms[1], DateEvection =  new DateOnly(2024, 5, 10) },
-            new BookedRoom { Id = 3, Client = Clients[2], DateArrival = new DateOnly(2024, 5, 15), PeriodInDays = 7, Room = Rooms[2], DateEvection =  new DateOnly(2024, 5, 22) },
-            new BookedRoom { Id = 4, Client = Clients[3], DateArrival = new DateOnly(2024, 6, 1), PeriodInDays = 3, Room = Rooms[3], DateEvection =  new DateOnly(2024, 6, 4) },
-            new BookedRoom { Id = 5, Client = Clients[5], DateArrival = new DateOnly(2024, 6, 20), PeriodInDays = 9, Room = Rooms[5], DateEvection =  new DateOnly(2024, 06, 29) },
-            new BookedRoom { Id = 6, Client = Clients[6], DateArrival = new DateOnly(2024, 7, 1), PeriodInDays = 6, Room = Rooms[6], DateEvection =  new DateOnly(2024, 7, 7) },
-            new BookedRoom { Id = 7, Client = Clients[7], DateArrival = new DateOnly(2024, 7, 10), PeriodInDays = 11, Room = Rooms[7], DateEvection =  new DateOnly(2024, 7, 21) },
-            new BookedRoom { Id = 8, Client = Clients[8], DateArrival = new DateOnly(2024, 7, 20), PeriodInDays = 8, Room = Rooms[8], DateEvection =  new DateOnly(2024, 7, 28) },
-            new BookedRoom { Id = 9, Client = Clients[9], DateArrival = new DateOnly(2024, 8, 1), PeriodInDays = 4, Room = Rooms[9], DateEvection =  new DateOnly(2024, 8, 5) },
-            new BookedRoom { Id = 10, Client = Clients[10], DateArrival = new DateOnly(2024, 8, 10), PeriodInDays = 12, Room = Rooms[10], DateEvection =  new DateOnly(2024, 8, 22) },
-            new BookedRoom { Id = 11, Client = Clients[12], DateArrival = new DateOnly(2024, 6, 1), PeriodInDays= 3, Room = Rooms[14], DateEvection =  new DateOnly(2024, 6, 4) },
-            new BookedRoom { Id = 12, Client = Clients[13], DateArrival = new DateOnly(2024, 6 ,10), PeriodInDays = 14, Room = Rooms[15], DateEvection =  new DateOnly(2024, 6, 24) },
-            new BookedRoom { Id = 13, Client = Clients[14], DateArrival = new DateOnly(2024, 6, 20), PeriodInDays = 9, Room = Rooms[20], DateEvection =  new DateOnly(2024, 6, 29) },
-            new BookedRoom { Id = 14, Client = Clients[15], DateArrival = new DateOnly(2024 ,7, 1), PeriodInDays = 6, Room = Rooms[16],  DateEvection =  new DateOnly(2024, 7, 7) }
+            new BookedRoom { Id = 0, Client = Clients[0], ClientId = Clients[0].Id, DateArrival = new DateOnly(2024, 4, 28), PeriodInDays = 10, Room = Rooms[0], RoomId = Rooms[0].Id, DateEvection =  new DateOnly(2024, 5, 8) },
+            new BookedRoom { Id = 1, Client = Clients[11], ClientId = Clients[11].Id, DateArrival = new DateOnly(2024, 4, 28), PeriodInDays = 10, Room = Rooms[11], RoomId = Rooms[11].Id, DateEvection =  new DateOnly(2024, 05, 8) },
+            new BookedRoom { Id = 2, Client = Clients[1], ClientId = Clients[1].Id, DateArrival = new DateOnly(2024, 5, 5), PeriodInDays = 5, Room = Rooms[1], RoomId = Rooms[1].Id, DateEvection =  new DateOnly(2024, 5, 10) },
+            new BookedRoom { Id = 3, Client = Clients[2], ClientId = Clients[2].Id, DateArrival = new DateOnly(2024, 5, 15), PeriodInDays = 7, Room = Rooms[2], RoomId = Rooms[2].Id, DateEvection =  new DateOnly(2024, 5, 22) },
+            new BookedRoom { Id = 4, Client = Clients[3], ClientId = Clients[3].Id, DateArrival = new DateOnly(2024, 6, 1), PeriodInDays = 3, Room = Rooms[3], RoomId = Rooms[3].Id, DateEvection =  new DateOnly(2024, 6, 4) },
+            new BookedRoom { Id = 5, Client = Clients[5], ClientId = Clients[5].Id, DateArrival = new DateOnly(2024, 6, 20), PeriodInDays = 9, Room = Rooms[5], RoomId = Rooms[5].Id, DateEvection =  new DateOnly(2024, 06, 29) },
+            new BookedRoom { Id = 6, Client = Clients[6], ClientId = Clients[6].Id, DateArrival = new DateOnly(2024, 7, 1), PeriodInDays = 6, Room = Rooms[6], RoomId = Rooms[6].Id, DateEvection =  new DateOnly(2024, 7, 7) },
+            new BookedRoom { Id = 7, Client = Clients[7], ClientId = Clients[7].Id, DateArrival = new DateOnly(2024, 7, 10), PeriodInDays = 11, Room = Rooms[7], RoomId = Rooms[7].Id, DateEvection =  new DateOnly(2024, 7, 21) },
+            new BookedRoom { Id = 8, Client = Clients[8], ClientId = Clients[8].Id, DateArrival = new DateOnly(2024, 7, 20), PeriodInDays = 8, Room = Rooms[8], RoomId = Rooms[8].Id, DateEvection =  new DateOnly(2024, 7, 28) },
+            new BookedRoom { Id = 9, Client = Clients[9], ClientId = Clients[9].Id, DateArrival = new DateOnly(2024, 8, 1), PeriodInDays = 4, Room = Rooms[9], RoomId = Rooms[9].Id, DateEvection =  new DateOnly(2024, 8, 5) },
+            new BookedRoom { Id = 10, Client = Clients[10], ClientId = Clients[10].Id, DateArrival = new DateOnly(2024, 8, 10), PeriodInDays = 12, Room = Rooms[10], RoomId = Rooms[10].Id, DateEvection =  new DateOnly(2024, 8, 22) },
+            new BookedRoom { Id = 11, Client = Clients[12], ClientId = Clients[12].Id, DateArrival = new DateOnly(2024, 6, 1), PeriodInDays= 3, Room = Rooms[14], RoomId = Rooms[14].Id, DateEvection =  new DateOnly(2024, 6, 4) },
+            new BookedRoom { Id = 12, Client = Clients[13], ClientId = Clients[13].Id, DateArrival = new DateOnly(2024, 6 ,10), PeriodInDays = 14, Room = Rooms[15], RoomId = Rooms[15].Id, DateEvection =  new DateOnly(2024, 6, 24) },
+            new BookedRoom { Id = 13, Client = Clients[14], ClientId = Clients[14].Id, DateArrival = new DateOnly(2024, 6, 20), PeriodInDays = 9, Room = Rooms[20], RoomId = Rooms[20].Id, DateEvection =  new DateOnly(2024, 6, 29) },
+            new BookedRoom { Id = 14, Client = Clients[15], ClientId = Clients[15].Id, DateArrival = new DateOnly(2024 ,7, 1), PeriodInDays = 6, Room = Rooms[16],  RoomId = Rooms[16].Id, DateEvection =  new DateOnly(2024, 7, 7) }
         ];
     }
 }
