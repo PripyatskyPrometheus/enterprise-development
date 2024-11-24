@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Domain;
 
-public class HotelBookingContext(DbContextOptions<HotelBookingContext> options) : DbContext(options)
+public class HotelBookingDbContext(DbContextOptions<HotelBookingDbContext> options) : DbContext(options)
 {
     /// <summary>
     /// Таблица отелей
@@ -26,17 +26,17 @@ public class HotelBookingContext(DbContextOptions<HotelBookingContext> options) 
     public DbSet<Passport> Passports { get; set; }
 
     /// <summary>
-    /// HotelClient table
+    /// Таблица клиентов
     /// </summary>
     public DbSet<Client> Clients { get; set; }
 
     /// <summary>
-    /// BookedRoom table
+    /// Таблица забранированных номеров
     /// </summary>
     public DbSet<BookedRoom> BookedRooms { get; set; }
 
     /// <summary>
-    /// Overriding the method for establishing relationships between tables
+    /// Установление связей между таблицами
     /// </summary>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

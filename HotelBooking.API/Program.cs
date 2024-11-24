@@ -1,12 +1,16 @@
+using Microsoft.EntityFrameworkCore;
 using HotelBooking.API;
 using HotelBooking.API.Repository;
 using HotelBooking.API.Services;
+using HotelBooking.Domain;
 using HotelBooking.Domain.Entity;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<HotelBookingDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
