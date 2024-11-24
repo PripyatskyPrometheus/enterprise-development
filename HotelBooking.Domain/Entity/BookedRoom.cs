@@ -53,6 +53,6 @@ public class BookedRoom
     /// <summary>
     /// Период
     /// </summary>
-    [Column("DateEvection")]
+    [Column("PeriodInDays")]
     public required int PeriodInDays { get; set; }
 }
