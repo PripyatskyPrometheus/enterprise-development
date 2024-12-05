@@ -40,6 +40,7 @@ public class HotelBookingDbContext(DbContextOptions<HotelBookingDbContext> optio
     /// </summary>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
         // Связь между Room и Hotel
         modelBuilder.Entity<Room>()
             .HasOne(r => r.Hotel)
