@@ -31,6 +31,9 @@ builder.Services.AddSingleton<IRepository<BookedRoom>, BookedRoomRepository>();
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy => { policy.AllowAnyOrigin(); policy.AllowAnyMethod();
+    policy.AllowAnyHeader();}));
+
 builder.Services.AddAutoMapper(typeof(Mapping));
 
 var app = builder.Build();
