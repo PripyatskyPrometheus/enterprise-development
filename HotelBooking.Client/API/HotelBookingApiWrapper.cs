@@ -6,7 +6,7 @@ public class HotelBookingApiWrapper(IConfiguration configuration) : IHotelBookin
 
     public async Task CreateHotel(HotelDto hotelDto) => await client.HotelPOSTAsync(hotelDto);
 
-    public async Task<ICollection<HotelGetDto>> GetHotels() =>  await client.HotelAllAsync();
+    public async Task<ICollection<HotelGetDto>> GetAllHotels() =>  await client.HotelAllAsync();
 
     public async Task<HotelGetDto> GetHotelById(int id) => await client.HotelGETAsync(id);
 

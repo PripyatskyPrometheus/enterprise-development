@@ -97,6 +97,6 @@
 
     private async Task RefreshHotelCollection()
     {
-        Hotels = await HotelBookingApi.GetHotels();
+        Hotels = await HotelBookingApi.GetAllHotels();
     }
 }
