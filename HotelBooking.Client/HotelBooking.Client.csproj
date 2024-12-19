@@ -30,11 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UI\Pages\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <OpenApiReference Include="API\swagger.json" ClassName="HotelBooking" CodeGenerator="NSwagCSharp" />
+    <OpenApiReference Include="API\swagger.json" ClassName="HotelBookingApi" CodeGenerator="NSwagCSharp" />
   </ItemGroup>
 
 </Project>

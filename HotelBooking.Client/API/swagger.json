@@ -181,7 +181,7 @@
         }
       }
     },
-    "/BookedRoom/get_all_client_in_hotel/{id}": {
+    "/BookedRoom/GetAllClientInHotel/{id}": {
       "get": {
         "tags": [
           "BookedRoom"
@@ -233,7 +233,7 @@
         }
       }
     },
-    "/BookedRoom/get_all_free_rooms/{city}": {
+    "/BookedRoom/GetAllFreeRooms/{city}": {
       "get": {
         "tags": [
           "BookedRoom"
@@ -284,7 +284,7 @@
         }
       }
     },
-    "/BookedRoom/get_clients_with_the_longest_hotel_stays": {
+    "/BookedRoom/GetClientsWithTheLongestHotelStays": {
       "get": {
         "tags": [
           "BookedRoom"
@@ -680,7 +680,7 @@
         }
       }
     },
-    "/api/Hotel/top_5_hotels_by_number_of_bookings": {
+    "/api/Hotel/TopFiveHotelsByNumberOfBookings": {
       "get": {
         "tags": [
           "Hotel"
@@ -719,7 +719,7 @@
         }
       }
     },
-    "/api/Hotel/cost_info_about_hotels": {
+    "/api/Hotel/CostInfoAboutHotels": {
       "get": {
         "tags": [
           "Hotel"

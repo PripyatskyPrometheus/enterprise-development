@@ -84,7 +84,7 @@ public class HotelController(IRepository<Hotel> repository, IRepository<Room> re
     /// <summary>
     /// Запрос возвращающий топ 5 отелей по количеству бронирований
     /// </summary>
-    [HttpGet("top_5_hotels_by_number_of_bookings")]
+    [HttpGet("TopFiveHotelsByNumberOfBookings")]
     public ActionResult<IEnumerable<Hotel>> GetTopFiveHotels()
     {
         return Ok(service.GetTopFiveHotelById(service.GetTopFiveHotelId()));
@@ -94,7 +94,7 @@ public class HotelController(IRepository<Hotel> repository, IRepository<Room> re
     /// Запрос возвращающий минимальную максимальную и среднюю цену комнат для каждого отеля
     /// </summary>
     /// <returns>структура {отель, минимальная цена комнаты, максимальная цена, средняя цена}</returns>
-    [HttpGet("cost_info_about_hotels")]
+    [HttpGet("CostInfoAboutHotels")]
     public ActionResult<IEnumerable<DataCostMinMaxAvgInHotel>> GetTop()
     {
         return Ok(service.GetMaxAvgMinForHotels(repositoryRoom.GetAll()));

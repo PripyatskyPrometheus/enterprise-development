@@ -2,7 +2,7 @@
 
 public class HotelBookingApiWrapper(IConfiguration configuration) : IHotelBookingApiWrapper
 {
-    public readonly HotelBooking client = new(configuration["OpenApi:ServerUrl"], new HttpClient());
+    public readonly HotelBookingApi client = new(configuration["OpenApi:ServerUrl"], new HttpClient());
 
     public async Task CreateHotel(HotelDto hotelDto) => await client.HotelPOSTAsync(hotelDto);
 

@@ -98,7 +98,7 @@ public class BookedRoomController(IRepository<BookedRoom> repository,
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("get_all_client_in_hotel/{id}")]
+    [HttpGet("GetAllClientInHotel/{id}")]
     public ActionResult<IEnumerable<Client>> GetAllClientInHotel(int id)
     {
         var hotel = service.GetHotelById(id);
@@ -115,7 +115,7 @@ public class BookedRoomController(IRepository<BookedRoom> repository,
     /// </summary>
     /// <param name="city"></param>
     /// <returns>Список свободных комнат</returns>
-    [HttpGet("get_all_free_rooms/{city}")]
+    [HttpGet("GetAllFreeRooms/{city}")]
     public ActionResult<IEnumerable<RoomDto>> GetFreeRoomInCity(string city)
     {
         var hotelsInCity = service.GetHotelsByCity(city);
@@ -130,7 +130,7 @@ public class BookedRoomController(IRepository<BookedRoom> repository,
     /// Возвращает клиентов с наибольшим временем проживания в отелях
     /// </summary>
     /// <returns>Список клиентов</returns>
-    [HttpGet("get_clients_with_the_longest_hotel_stays")]
+    [HttpGet("GetClientsWithTheLongestHotelStays")]
     public ActionResult<IEnumerable<DataBookedRoom>> GetLongLiversClient()
     {
         return Ok(service.GetLongLiversHotel());
