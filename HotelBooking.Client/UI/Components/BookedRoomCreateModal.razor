@@ -1,0 +1,111 @@
+﻿@inject IHotelBookingApiWrapper HotelBookingApi
+
+<Modal @ref="BookedRoomModal">
+    <ModalContent Centered>
+        <Form>
+            <ModalHeader>
+                <ModalTitle>Новое бронирование</ModalTitle>
+                <CloseButton Clicked="CloseBookedRoomModalAsync" />
+            </ModalHeader>
+
+            <ModalBody>
+                <Field>
+                    <FieldLabel>Клиент</FieldLabel>
+                    <Select TValue="int" @bind-SelectedValue="NewBookedRoom.ClientId">
+                        @if (Clients != null)
+                        {
+                            @foreach (var client in Clients)
+                            {
+                                <SelectItem Value="@client.Id">@client.FullName</SelectItem>
+                            }
+                        }
+                    </Select>
+                </Field>
+                <Field>
+                    <FieldLabel>Номер</FieldLabel>
+                    <Select TValue="int" @bind-SelectedValue="NewBookedRoom.RoomId">
+                        @if (Rooms != null)
+                        {
+                            @foreach (var room in Rooms)
+                            {
+                                <SelectItem Value="@room.Id">@room.Id</SelectItem>
+                            }
+                        }
+                    </Select>
+                </Field>
+                <Field>
+                    <FieldLabel>Дата заезда</FieldLabel>
+                    <DateEdit @bind-Date="DateArrival" />
+                </Field>
+                <Field>
+                    <FieldLabel>Дата выезда</FieldLabel>
+                    <DateEdit @bind-Date="DateEvection" />
+                </Field>
+                <Field>
+                    <FieldLabel>Период в днях</FieldLabel>
+                    <TextEdit @bind-Text="PeriodInDays" />
+                </Field>
+            </ModalBody>
+
+            <ModalFooter>
+                <Button Color="Color.Secondary" Clicked="CloseBookedRoomModalAsync">Отмена</Button>
+                <Button Color="Color.Primary" Clicked="CreateBookedRoomAsync">Создать</Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
+
+@code {
+    [Parameter]
+    public EventCallback OnBookedRoomAdded { get; set; }
+
+    private Modal BookedRoomModal { get; set; } = new();
+    private ICollection<ClientGetDto>? Clients { get; set; }
+    private ICollection<RoomGetDto>? Rooms { get; set; }
+    private System.DateOnly _dateArrival;
+    private System.DateOnly _dateEvection;
+    private string PeriodInDays { get; set; } = "0";
+    private BookedRoomDto NewBookedRoom { get; set; } = new();
+    private System.DateOnly DateArrival
+    {
+        get => _dateArrival;
+        set
+        {
+            _dateArrival = value;
+        }
+    }
+
+    private System.DateOnly DateEvection
+    {
+        get => _dateEvection;
+        set
+        {
+            _dateEvection = value;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Clients = await HotelBookingApi.GetAllClients();
+        Rooms = await HotelBookingApi.GetAllRooms();
+    }
+
+    public async Task Show() => await BookedRoomModal.Show();
+
+    private async Task CloseBookedRoomModalAsync() => await BookedRoomModal.Hide();
+
+    private async Task CreateBookedRoomAsync()
+    {
+        NewBookedRoom.DateArrival = DateArrival.ToString("yyyy-MM-dd");
+        NewBookedRoom.DateEvection = DateEvection.ToString("yyyy-MM-dd");
+
+        if (int.TryParse(PeriodInDays, out var parsedPeriodInDays))
+        {
+            NewBookedRoom.PeriodInDays = parsedPeriodInDays;
+        }
+
+        await HotelBookingApi.CreateBookedRoom(NewBookedRoom);
+        await BookedRoomModal.Hide();
+        await OnBookedRoomAdded.InvokeAsync();
+    }
+}

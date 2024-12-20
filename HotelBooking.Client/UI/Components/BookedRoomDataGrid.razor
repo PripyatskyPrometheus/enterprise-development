@@ -1,0 +1,120 @@
+﻿@inject IHotelBookingApiWrapper HotelBookingApi
+@inject NavigationManager NavManager
+
+<Card>
+    <CardHeader>
+        <Row Class="justify-content-between">
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <h4>Забронированные номера</h4>
+            </Column>
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <Button Color="Color.Primary" Clicked="OpenCreateModal">
+                    Создать
+                </Button>
+            </Column>
+        </Row>
+    </CardHeader>
+    <CardBody>
+        <DataGrid TItem="BookedRoomGetDto"
+                  Data="BookedRooms"
+                  Responsive
+                  Striped>
+            <DataGridColumns>
+                <DataGridColumn Width="150px"
+                                TItem="BookedRoomGetDto"
+                                Field="@nameof(BookedRoomGetDto.Id)"
+                                Caption="Действия">
+                    <DisplayTemplate>
+                        <Dropdown>
+                            <DropdownToggle Color="Color.Primary">
+                                Действия
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem Clicked="() => OpenEditPageAsync(context)">
+                                    Редактировать
+                                </DropdownItem>
+                                <DropdownItem Clicked="() => DeleteBookedRoomAsync(context)">
+                                    Удалить
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="BookedRoomGetDto"
+                                Field="@nameof(BookedRoomGetDto.Client.FullName)"
+                                Caption="Клиент">
+                </DataGridColumn>
+                <DataGridColumn TItem="BookedRoomGetDto"
+                                Field="@nameof(BookedRoomGetDto.Room.Id)"
+                                Caption="Номер">
+                    <DisplayTemplate>
+                        @{
+                            var room = context.Room;
+                            <span>{room.Id}</span>
+                        }
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="BookedRoomGetDto"
+                                Field="@nameof(BookedRoomGetDto.DateArrival)"
+                                Caption="Дата заезда">
+                    <DisplayTemplate>
+                        @context.DateArrival.ToString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="BookedRoomGetDto"
+                                Field="@nameof(BookedRoomGetDto.DateEvection)"
+                                Caption="Дата выезда">
+                    <DisplayTemplate>
+                        @context.DateEvection.ToString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="BookedRoomGetDto"
+                                Field="@nameof(BookedRoomGetDto.PeriodInDays)"
+                                Caption="Период в днях">
+                </DataGridColumn>
+            </DataGridColumns>
+        </DataGrid>
+    </CardBody>
+</Card>
+
+<BookedRoomCreateModal @ref="BookedRoomCreateModal" OnBookedRoomAdded="@HandleBookedRoomAdded" />
+
+@code {
+    [Parameter]
+    public EventCallback OnDataChanged { get; set; }
+
+    private ICollection<BookedRoomGetDto> BookedRooms { get; set; } = [];
+
+    private BookedRoomCreateModal BookedRoomCreateModal { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshBookedRoomCollection();
+        await base.OnInitializedAsync();
+    }
+
+    private void OpenEditPageAsync(BookedRoomGetDto context)
+    {
+        NavManager.NavigateTo($"bookedrooms/{context.Id}");
+    }
+
+    private async Task DeleteBookedRoomAsync(BookedRoomGetDto context)
+    {
+        await HotelBookingApi.DeleteBookedRoom(context.Id);
+        await RefreshBookedRoomCollection();
+        await OnDataChanged.InvokeAsync();
+    }
+
+    private async Task HandleBookedRoomAdded()
+    {
+        await RefreshBookedRoomCollection();
+        await OnDataChanged.InvokeAsync();
+    }
+
+    private async Task OpenCreateModal() => await BookedRoomCreateModal.Show();
+
+    private async Task RefreshBookedRoomCollection()
+    {
+        BookedRooms = await HotelBookingApi.GetAllBookedRooms();
+    }
+}
